@@ -1,7 +1,5 @@
 # Dunk & Degree
 
-BOUHH
-
 ## Suject
 
 * Projet Transverse :
