@@ -1,4 +1,4 @@
-# dunk-degree
+# Dunk & Degree
 
 BOUHH
 
