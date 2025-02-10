@@ -25,7 +25,7 @@ Game of Basket ball, including variable (time, speed), trajectory (curve), feedb
 
 Simulator of a basketball game, the goal being to score a maximum of points in a limited time. 
 
-___________
+
 ___________
 
 ## Game
@@ -47,14 +47,14 @@ ___________
 
 **Level :**
 
-- Easy : the basket doesn’t move 
-+ 3 game
-- Normal : the basket move slowly 
+>Easy : the basket doesn’t move 
+- 3 game
+>Normal : the basket move slowly 
 + 3 game (left to right / up to done / every direction)
-- Intermediate : the basket move at an average speed
+>Intermediate : the basket move at an average speed
 + 5 game (left to right / up to down / left, right, up and down / diagonals)
-- Difficult : the basket move faster at every game and
+>Difficult : the basket move faster at every game and
 + 5 game different direction (left to right / up to down / left, right, up and down / diagonals)
-- Expert : the basket move faster and even faster as the time pass 
+>Expert : the basket move faster and even faster as the time pass 
 + 1 (but 3) operation “fake hope”
 + **Final Boss**
