@@ -1,6 +1,4 @@
-# dunk-degree
-
-BOUHH
+# Dunk & Degree
 
 ## Suject
 
