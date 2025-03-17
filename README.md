@@ -10,6 +10,7 @@ d’apprentissages de leur niveau d’étude.
 
 
 
+
 * Problematic :
 
 **How to optimize the precision and speed of shots to maximize the number of successful baskets in a limited time ?**
