@@ -3,8 +3,6 @@ import random
 
 
 
-
-
 #  Initialisation of Pygame
 pygame.init()
 
@@ -22,6 +20,7 @@ ball_x, ball_y = WIDTH// 2, HEIGHT - 50  #Initial position of the ball
 basket_x, basket_y = WIDTH // 2, 100   #Initial position of the basket
 ball_speed_y = -10     #Speed of ball when it up
 ball_in_air = False    #Verify if the ball is in air or not
+
 
 #Parameter's level
 difficulty_levels={
