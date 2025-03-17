@@ -1,32 +1,34 @@
 import pygame
 import random
 
+
+
+
+
 #  Initialisation of Pygame
 pygame.init()
 
-#Windows's parameters
-WIDTH, HEIGHT = 1200, 750
-screen = pygame.display.set_mode ((WIDTH, HEIGHT))
-pygame.display.set_caption ("Dunk & Degree")
-
 
 #Basket's image
-basket_img = pygame.image.load(".... .png")
-basket_img = pygame.transformation.scale(basket_img, (80,50))
+basket_img = pygame.image.load("basket.png").convert_alpha()
+basket_img = pygame.transform.scale(basket_img, (80,50))
 
+#Ball's image
+ball_img = pygame.image.load("ball_orange.png").convert_alpha()
+ball_img = pygame.transform.scale(ball_orange.png, (30,30))
 
 #Initials positions
-ball_x, ball_y = WIDTH// 2, HEIGHT - 50
-basket_x, basket_y = WIDTH // 2, 100
-ball_speed_y = -10
-ball_in_air = False
+ball_x, ball_y = WIDTH// 2, HEIGHT - 50  #Initial position of the ball
+basket_x, basket_y = WIDTH // 2, 100   #Initial position of the basket
+ball_speed_y = -10     #Speed of ball when it up
+ball_in_air = False    #Verify if the ball is in air or not
 
 #Parameter's level
 difficulty_levels={
     "Easy":{"speed":0, "modes":[0]},
     "Normal":{"speed": 2,"modes":[1,2,3]},
     "Intermediate":{"speed":4, "modes":[1,2,3,4,5]},
-    "Difficult":{"speed": 6, "modes":[1,2,3,4,5,]},
+    "Difficult":{"speed": 6, "modes":[1,2,3,4,5]},
     "Expert":{"speed":8, "modes":[6]}
 }
 
