@@ -4,7 +4,7 @@ pygame.init()
 
 # Game settings
 DURATION = 30  # duration in seconds
-screen = pygame.display.set_mode((600, 400))
+screen = pygame.display.set_mode((1200, 750))
 font = pygame.font.Font(None, 50)
 
 # Start Time
@@ -21,8 +21,8 @@ while running:
         running = False
 
     # Show remaining time
-    time_text = font.render(f"Temps restant: {DURATION - elapsed_time}s", True, (255, 255, 255))
-    screen.blit(time_text, (150, 180))
+    time_text = font.render(f"Remaining Time : {DURATION - elapsed_time}s", True, (255, 255, 255))
+    screen.blit(time_text, (442, 200))
 
     pygame.display.flip()
 
