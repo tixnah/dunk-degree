@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+import main_nour
 
 
 
@@ -8,8 +9,8 @@ import time
 pygame.init()
 
 
+#Nour's program
 
-            #Nour's program
 #Screen
 screen_width = 1200
 screen_height = 750
@@ -17,44 +18,56 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 pygame.display.set_caption("Dunk & Degree")
 
+background = pygame.image.load("background.png")
+basket_img = pygame.image.load("basket.png")
+basket_img = pygame.transform.scale(basket_img, (400, 350))
+
+running = True
+
+def check_event ():
+    global running
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+def show_img():
+    screen.blit(background, (0, 0))
+    screen.blit(basket_img, (850, 50))
+
+while running :
+    check_event()
+    show_img()
+    pygame.display.flip()
+
+#End Nour's program
 
 
-#Basket's image
-basket_img = pygame.image.load("basket.png").convert_alpha()
-basket_img = pygame.transform.scale(basket_img, (200,150))
 
 #Ball's image
-ball_img = pygame.image.load("ball_orange.png").convert_alpha()
-ball_img = pygame.transform.scale(ball_img, (30,30))
+ball_img = pygame.image.load("ball_violet.png").convert_alpha()
+ball_img = pygame.transform.scale(ball_img, (90,90))
+
+
 
 #Initials positions
 ball_x, ball_y = screen_width// 10, screen_height - 50  #Initial position of the ball
-basket_x, basket_y = screen_width//3, 100   #Initial position of the basket
+# basket_x, basket_y = screen_width//2, 100   #Initial position of the basket
 ball_speed_y = -10     #Speed of ball when it up
 ball_in_air = False    #Verify if the ball is in air or not
-
-#Colors
-PASTEL_BLUE = (173, 216, 230)
-PASTEL_GREEN = (144, 238, 144)
-PASTEL_YELLOW = (255, 255, 153)
-PASTEL_ORANGE = (255, 179, 102)
-PASTEL_RED = (255, 102, 102)
-WHITE = (255, 255, 255)
 
 
 #Score
 score = 0
-difficulty_levels_order = ["Easy", "Normal", "Intermediate", "Difficult", "Expert", "Impossible"]
+difficulty_levels_order = ["Easy", "Normal", "Intermediate", "Difficult"]
 current_level_index = 0
 
 
 #Parameter's level
 difficulty_levels = {
-    "Easy": {"color": PASTEL_BLUE, "speed": 0, "modes": [0]},
-    "Normal": {"color": PASTEL_GREEN, "speed": 2, "modes": [1, 2, 3]},
-    "Intermediate": {"color": PASTEL_YELLOW, "speed": 4, "modes": [1, 2, 3, 4, 5]},
-    "Difficult": {"color": PASTEL_ORANGE, "speed": 6, "modes": [1, 2, 3, 4, 5]},
-    "Expert": {"color": PASTEL_RED, "speed": 8, "modes": [6]}
+    "Easy": {"level" : [1, 2, 3], "speed": 0, "modes": [0]},
+    "Normal": {"level" : [4, 5, 6], "speed": 2, "modes": [1, 2, 3]},
+    "Intermediate": {"level" : [7, 8, 9], "speed": 4, "modes": [1, 2, 3, 4, 5]},
+    "Difficult": {"level": [10, 11, 12], "speed": 6, "modes": [1, 2, 3, 4, 5]},
 }
 
 difficulty = "Easy"  # Modify for change the difficulty
@@ -64,21 +77,23 @@ basket_dx, basket_dy = basket_speed, basket_speed
 
 
 
+# move basket
+
 def move_basket():
     global basket_x, basket_y, basket_dx, basket_dy, basket_speed
-    if difficulty == "Expert":
-        basket_speed += 0.01 #Augmentation of the velocity with the time
-        basket_x = basket_dy = int(basket_speed)
+
     #left-right
     if basket_mode == 1:
         basket_x += basket_dx
         if basket_x <= 0 or basket_x >= screen_width - 80:
             basket_dx *= -1
+
     #up-done
     elif basket_mode == 2:
         basket_y += basket_dy
         if basket_y <= 50 or basket_y >= screen_height // 2:
             basket_dy += -1
+
     #every directions
     elif basket_mode == 3:
         basket_x += basket_dx
@@ -87,6 +102,7 @@ def move_basket():
             basket_dx *= -1
         if basket_y <= 50 or basket_y >= screen_height // 2:
             basket_dy *= -1
+
     #diagonals
     elif basket_mode == 4:
         basket_x += basket_dx
@@ -140,7 +156,7 @@ while running :
 
     move_basket ()
 
-    screen.blit(basket_img, (basket_x, basket_y))
+    #screen.blit(basket_img, (basket_x, basket_y))
     screen.blit(ball_img, (ball_x, ball_y))
 
     pygame.display.update()
