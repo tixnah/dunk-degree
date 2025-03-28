@@ -45,7 +45,7 @@ while running:
     pygame.display.flip()
 
     #timer
-    elapsed_time = (pygame.time.get_ticks() - start_time) // 2500
+    elapsed_time = (pygame.time.get_ticks() - start_time) // 1000
 
     # Check if the time is up
     if elapsed_time >= DURATION:
