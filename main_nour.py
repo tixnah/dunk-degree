@@ -21,7 +21,7 @@ def check_event ():
 
 def show_img():
     screen.blit(background, (0, 0))
-    screen.blit(basket, (1100, 700))
+    screen.blit(basket, (0, 0))
 
 while running :
     check_event()
