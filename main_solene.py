@@ -4,7 +4,7 @@ pygame.init()
 
 # Game settings
 DURATION = 45  # duration in seconds
-screen_width, screen_height = 1200, 750
+screen_width, screen_height = 1200, 675
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Dunk & Degree")
 
