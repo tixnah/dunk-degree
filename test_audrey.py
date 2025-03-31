@@ -58,13 +58,34 @@ parameter_button_rect = pygame.Rect(686,556,119,35)
 quit_menu_button_rect = pygame.Rect(963,556,79,35)
 # Button to quit the window when you are in the Menu
 
-# IN PARAMETER & GUIDE BUTTONS
+# IN PARAMETER & GUIDE BUTTON
 return_menu_button_rect = pygame.Rect(830,529,237,66)
 # Button to go back to the Menu work both for the background "guide" and "parameter"
-music_on_button_rect = pygame.Rect()
+
+# IN PARAMETER BUTTONS
+
+#MUSIC
+music_on_button_rect = pygame.Rect(829,189,76,41)
 # Button to have the music ON when it was OFF
-music_off_button_rect = pygame.Rect()
+music_off_button_rect = pygame.Rect(1002,189,76,41)
 # Button to have the music OFF when it was ON
+
+#BALL
+violet_ball_button_rect = pygame.Rect(651,370,712,102)
+# Select Purple Ball
+blue_ball_button_rect = pygame.Rect(824,370,712,102)
+# Select Blue Ball
+orange_ball_button_rect = pygame.Rect(996,370,712,102)
+# Select Orange Ball
+
+#AVATAR
+avatar_1_button_rect = pygame.Rect(89,243,115,178)
+# 1st avatar - at the left - Girl n°1
+avatar_1_button_rect = pygame.Rect(266,243,115,178)
+# 2nd avatar - at the middle - Girl n°2
+avatar_1_button_rect = pygame.Rect(449,243,115,178)
+# 3rd avatar - at the right - Boy
+
 
 
 # IN GAME BUTTONS
