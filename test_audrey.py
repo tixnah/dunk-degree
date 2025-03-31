@@ -27,10 +27,16 @@ menu = pygame.image.load("menu.png")
 # Load the image "menu.png" as the background named "menu"
 guide = pygame.image.load("guide.png")
 # Load the image "guide.png" as the background named "guide"
-parameter = pygame.image.load("parameter.png")
-# Load the image "parameter.png" as the background named "parameter"
-background = pygame.image.load("background.png")
-# Load the image "background.png" as the background named "background_game_1"
+game = pygame.image.load("background.png")
+# Load the image "background.png" as the background named "game"
+parameter_on = pygame.image.load("parama_on.png")
+# Load the image "parama_on.png" as the background named "parameter_on"
+parameter_off = pygame.image.load("param_off.png")
+# Load the image "param_off.png" as the background named "parameter_off"
+
+##############################################################
+#REMEMBER TO ADD IN THE DEF SHOW_ING - AT THE END OF THE CODE
+##############################################################
 
 
 # LOAD ALL THE IMAGES OBJECTS
@@ -53,8 +59,8 @@ parameter_button_rect = pygame.Rect(686,556,119,35)
 quit_menu_button_rect = pygame.Rect(963,556,79,35)
 # Button to quit the game when you are in the Menu
 return_menu_button_rect = pygame.Rect(830,529,237,66)
-# Button to go back to the Menu
-# Return_menu_button_rect work both for the background "guide" and "parameter"
+# Button to go back to the Menu work both for the background "guide" and "parameter"
+quit_game_button_rect = pygame.Rect(1001,20,772,42)
 
 
 # GAME LOOP CONTROL
@@ -81,12 +87,11 @@ def check_event ():
 
             # \ if the click is on the button play
             if start_button_rect.collidepoint(pos):
-                current_screen = "background"
+                current_screen = "game"
                 pygame.display.set_caption("Dunk & Degree - Game")
                 pygame.display.flip()
                 print("Start button pressed - Starting...\nThe Game Begins!\n")
 
-                pass # CODE FOR THE GAME
 
             # \ if the click is on the button guide
             elif guide_button_rect.collidepoint(pos):
@@ -134,13 +139,59 @@ def check_event ():
 
 
 
+
+
+
+
+MUSIC ON OFF
+
+                # \ if we are in the guide or in the parameter page
+        if current_screen in ["guide", "parameter"]:
+            # \ if the click is on the button return menu
+            if return_menu_button_rect.collidepoint(pos):
+                current_screen = "menu"
+                pygame.display.flip()  # \ Refresh the image
+                pygame.display.set_caption("Dunk & Degree - Menu")  # \ display the menu image
+                time.sleep(0.4)
+                print("Return to the Menu button pressed - Switch to the return menu page...\nYou are in the Menu.")
+                time.sleep(0.2)
+                print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
+                print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
+
+
+
+
+
+
+        # \ if we are in the game
+        if current_screen == "game":
+
+            # \ if the click is on the button return menu
+            if quit_game_button_rect.collidepoint(pos):
+                current_screen = "menu"
+                pygame.display.flip()  # \ Refresh the image
+                pygame.display.set_caption("Dunk & Degree - Menu")    # \ display the menu image
+                time.sleep(0.4)
+                print("Return to the Menu button pressed - Switch to the return menu page...\nYou are in the Menu.")
+                time.sleep(0.2)
+                print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
+                print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
+
+
+
+
+
 def show_img():     # \ Function to display the images on the screen
     if current_screen == "menu":
         screen.blit(menu, (0, 0))     # \ Draw the background "menu" at position (0,0)
     if current_screen == "guide":
         screen.blit(guide, (0, 0))     # \ Draw the background "guide" at position (0,0)
-    if current_screen == "parameter":
-        screen.blit(parameter, (0, 0))     # \ Draw the background "parameter" at position (0,0)
+    if current_screen == "game":
+        screen.blit(game, (0, 0))     # \ Draw the background "game" at position (0,0)
+    if current_screen == "parameter_on":
+        screen.blit(parameter_on, (0, 0))     # \ Draw the background "parameter_on" at position (0,0)
+    if current_screen == "parameter_off":
+        screen.blit(parameter_off, (0, 0))     # \ Draw the background "parameter_off" at position (0,0)
 
 
 while running :     # \ main game loop
