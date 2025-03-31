@@ -33,6 +33,7 @@ parameter_on = pygame.image.load("parama_on.png")
 parameter_off = pygame.image.load("param_off.png")
 # Load the image "param_off.png" as the background named "parameter_off"
 
+
 ##############################################################
 #REMEMBER TO ADD IN THE DEF SHOW_ING - AT THE END OF THE CODE
 ##############################################################
@@ -44,6 +45,9 @@ ball_violet = pygame.image.load("ball_violet.png")
 # Load the image "ball_violet.png" as the background named "ball_violet"
 sheep_1 = pygame.image.load("mouton-face.png")
 # Load the image "mouton-face.png" as the background named "sheep_1"
+click = pygame.image.load("click.png")
+click = pygame.transform.scale(click, (400, 350))
+# Load the image "click.png" as "click"
 
 
 # DEFINE THE BUTTONS
@@ -87,7 +91,6 @@ avatar_1_button_rect = pygame.Rect(449,243,115,178)
 # 3rd avatar - at the right - Boy
 
 
-
 # IN GAME BUTTONS
 quit_game_button_rect = pygame.Rect(1001,20,772,42)
 
@@ -99,6 +102,8 @@ pygame.display.set_caption("Dunk & Degree - Menu")
 
 def check_event ():
     music = True
+    avatar = 1
+    ball = 1
     global running, current_screen  # \ Access the global 'running" variable
     pos = None
 
@@ -237,7 +242,45 @@ def check_event ():
                 print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
 
+        if current_screen in ["parameter_off", "parameter_on"]:
+            if avatar_1_button_rect.collidepoint(pos):
 
+            elif avatar_2_button_rect.collidepoint(pos):
+
+            elif avatat_3_button_rect.collidepoint(pos):
+
+
+
+
+                violet_ball_button_rect = pygame.Rect(651, 370, 712, 102)
+                # Select Purple Ball
+                blue_ball_button_rect = pygame.Rect(824, 370, 712, 102)
+                # Select Blue Ball
+                orange_ball_button_rect = pygame.Rect(996, 370, 712, 102)
+                # Select Orange Ball
+
+                # AVATAR
+                avatar_1_button_rect = pygame.Rect(89, 243, 115, 178)
+                # 1st avatar - at the left - Girl n°1
+                avatar_1_button_rect = pygame.Rect(266, 243, 115, 178)
+                # 2nd avatar - at the middle - Girl n°2
+                avatar_1_button_rect = pygame.Rect(449, 243, 115, 178)
+
+
+
+
+        if avatar = 1:
+
+        elif avatar = 2:
+
+        elif avatar = 3:
+
+
+        if ball = 1:
+
+        elif ball = 2:
+
+        elif ball = 3:
 
 
 
@@ -256,6 +299,11 @@ def show_img():     # \ Function to display the images on the screen
 
     if current_screen == "parameter_off":
         screen.blit(parameter_off, (0, 0))     # \ Draw the background "parameter_off" at position (0,0)
+
+
+
+
+
 
 
 
