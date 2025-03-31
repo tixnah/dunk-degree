@@ -1,8 +1,7 @@
 import pygame
 # Import the pygame module
-
 import time
-
+# Import time
 
 pygame.init()
 # Initialize all pygame modules
@@ -49,17 +48,26 @@ sheep_1 = pygame.image.load("mouton-face.png")
 
 # DEFINE THE BUTTONS
 
+# IN THE MENU BUTTONS
 start_button_rect = pygame.Rect(132,556,106,35)
 # Button Start in the Menu
 guide_button_rect = pygame.Rect(382,556,119,35)
 # Button to go to the Guide page from the Menu
 parameter_button_rect = pygame.Rect(686,556,119,35)
 # Button to go to the Parameter page from the Menu
-
 quit_menu_button_rect = pygame.Rect(963,556,79,35)
-# Button to quit the game when you are in the Menu
+# Button to quit the window when you are in the Menu
+
+# IN PARAMETER & GUIDE BUTTONS
 return_menu_button_rect = pygame.Rect(830,529,237,66)
 # Button to go back to the Menu work both for the background "guide" and "parameter"
+music_on_button_rect = pygame.Rect()
+# Button to have the music ON when it was OFF
+music_off_button_rect = pygame.Rect()
+# Button to have the music OFF when it was ON
+
+
+# IN GAME BUTTONS
 quit_game_button_rect = pygame.Rect(1001,20,772,42)
 
 
@@ -68,8 +76,8 @@ running = True      # \ Game loop
 current_screen = "menu"
 pygame.display.set_caption("Dunk & Degree - Menu")
 
-
 def check_event ():
+    music = True
     global running, current_screen  # \ Access the global 'running" variable
     pos = None
 
@@ -108,13 +116,22 @@ def check_event ():
 
             # \ if the click is on the button parameter
             elif parameter_button_rect.collidepoint(pos):
-                current_screen = "parameter"    # \ display the parameter image
-                pygame.display.set_caption("Dunk & Degree - Parameter")     # \ "Dunk & Degree - Parameter" become the title of the window
-                pygame.display.flip()       # \ Refresh the image
-                time.sleep(0.4)
-                print("\nParameter button pressed - Switch to the parameter page...")
-                time.sleep(0.5)
-                print("\nYou are in the Parameter. \nChoose your option or go back to the Menu.\n")
+                if music :
+                    current_screen = "parameter_on"    # \ display the parameter image
+                    pygame.display.set_caption("Dunk & Degree - Parameter")     # \ "Dunk & Degree - Parameter" become the title of the window
+                    pygame.display.flip()       # \ Refresh the image
+                    time.sleep(0.4)
+                    print("\nParameter button pressed - Switch to the parameter page...")
+                    time.sleep(0.5)
+                    print("\nYou are in the Parameter. \nChoose your option or go back to the Menu.\n")
+                else :
+                    current_screen = "parameter_off"  # \ display the parameter image
+                    pygame.display.set_caption("Dunk & Degree - Parameter")  # \ "Dunk & Degree - Parameter" become the title of the window
+                    pygame.display.flip()  # \ Refresh the image
+                    time.sleep(0.4)
+                    print("\nParameter button pressed - Switch to the parameter page...")
+                    time.sleep(0.5)
+                    print("\nYou are in the Parameter. \nChoose your option or go back to the Menu.\n")
 
 
             # \ if the click is on the button quit
@@ -124,7 +141,7 @@ def check_event ():
 
 
         # \ if we are in the guide or in the parameter page
-        if current_screen in ["guide", "parameter"]:
+        if current_screen == "guide":
 
             # \ if the click is on the button return menu
             if return_menu_button_rect.collidepoint(pos):
@@ -137,21 +154,23 @@ def check_event ():
                 print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
 
-
-
-
-
-
-
-MUSIC ON OFF
-
-                # \ if we are in the guide or in the parameter page
-        if current_screen in ["guide", "parameter"]:
+        # \ for music ON TO OFF
+        if current_screen == "parameter_on":
             # \ if the click is on the button return menu
+            if return_menu_button_rect.collidepoint(pos):
+                music = 0
+                current_screen = "parameter_off"
+                pygame.display.flip()  # \ Refresh the image
+                pygame.display.set_caption("Dunk & Degree - Parameter")
+                time.sleep(0.4)
+                print("\nThe Music is OFF.")
+
+        # \ quit the parameter
+        if current_screen == "parameter_on":
             if return_menu_button_rect.collidepoint(pos):
                 current_screen = "menu"
                 pygame.display.flip()  # \ Refresh the image
-                pygame.display.set_caption("Dunk & Degree - Menu")  # \ display the menu image
+                pygame.display.set_caption("Dunk & Degree - Menu")    # \ display the menu image
                 time.sleep(0.4)
                 print("Return to the Menu button pressed - Switch to the return menu page...\nYou are in the Menu.")
                 time.sleep(0.2)
@@ -159,8 +178,28 @@ MUSIC ON OFF
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
 
 
+        # \ for music ON TO OFF
+        if current_screen == "parameter_off":
+            # \ if the click is on the button return menu
+            if return_menu_button_rect.collidepoint(pos):
+                music = True
+                current_screen = "parameter_on"
+                pygame.display.flip()  # \ Refresh the image
+                pygame.display.set_caption("Dunk & Degree - Parameter")
+                time.sleep(0.4)
+                print("\nThe Music is ON.")
 
-
+        # \ quit the parameter
+        if current_screen == "parameter_on":
+            if return_menu_button_rect.collidepoint(pos):
+                current_screen = "menu"
+                pygame.display.flip()  # \ Refresh the image
+                pygame.display.set_caption("Dunk & Degree - Menu")    # \ display the menu image
+                time.sleep(0.4)
+                print("Return to the Menu button pressed - Switch to the return menu page...\nYou are in the Menu.")
+                time.sleep(0.2)
+                print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
+                print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
 
 
         # \ if we are in the game
@@ -184,14 +223,19 @@ MUSIC ON OFF
 def show_img():     # \ Function to display the images on the screen
     if current_screen == "menu":
         screen.blit(menu, (0, 0))     # \ Draw the background "menu" at position (0,0)
+
     if current_screen == "guide":
         screen.blit(guide, (0, 0))     # \ Draw the background "guide" at position (0,0)
+
     if current_screen == "game":
         screen.blit(game, (0, 0))     # \ Draw the background "game" at position (0,0)
+
     if current_screen == "parameter_on":
         screen.blit(parameter_on, (0, 0))     # \ Draw the background "parameter_on" at position (0,0)
+
     if current_screen == "parameter_off":
         screen.blit(parameter_off, (0, 0))     # \ Draw the background "parameter_off" at position (0,0)
+
 
 
 while running :     # \ main game loop
