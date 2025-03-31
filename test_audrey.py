@@ -29,7 +29,7 @@ guide = pygame.image.load("guide.png")
 # Load the image "guide.png" as the background named "guide"
 parameter = pygame.image.load("parameter.png")
 # Load the image "parameter.png" as the background named "parameter"
-background_game_1 = pygame.image.load("background.png")
+background = pygame.image.load("background.png")
 # Load the image "background.png" as the background named "background_game_1"
 
 
@@ -81,7 +81,7 @@ def check_event ():
 
             # \ if the click is on the button play
             if start_button_rect.collidepoint(pos):
-                current_screen = "background_game_1"
+                current_screen = "background"
                 pygame.display.set_caption("Dunk & Degree - Game")
                 pygame.display.flip()
                 print("Start button pressed - Starting...\nThe Game Begins!\n")
@@ -117,6 +117,7 @@ def check_event ():
                 print("Quit button pressed - Quitting the game...")
                 running = False       # \ Quit the game
 
+
         # \ if we are in the guide or in the parameter page
         if current_screen in ["guide", "parameter"]:
 
@@ -130,6 +131,7 @@ def check_event ():
                 time.sleep(0.2)
                 print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
+
 
 
 def show_img():     # \ Function to display the images on the screen
