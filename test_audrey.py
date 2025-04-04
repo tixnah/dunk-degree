@@ -242,12 +242,12 @@ def check_event ():
                 print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
 
-        if current_screen in ["parameter_off", "parameter_on"]:
-            if avatar_1_button_rect.collidepoint(pos):
+       # if current_screen in ["parameter_off", "parameter_on"]:
+        #    if avatar_1_button_rect.collidepoint(pos):
 
-            elif avatar_2_button_rect.collidepoint(pos):
+         #   elif avatar_2_button_rect.collidepoint(pos):
 
-            elif avatat_3_button_rect.collidepoint(pos):
+          #  elif avatat_3_button_rect.collidepoint(pos):
 
 
 
@@ -269,18 +269,18 @@ def check_event ():
 
 
 
-        if avatar = 1:
+#        if avatar = 1:
 
-        elif avatar = 2:
+ #       elif avatar = 2:
 
-        elif avatar = 3:
+  #      elif avatar = 3:
 
 
-        if ball = 1:
+   #     if ball = 1:
 
-        elif ball = 2:
+    #    elif ball = 2:
 
-        elif ball = 3:
+     #   elif ball = 3:
 
 
 
