@@ -1,5 +1,9 @@
 from test_audrey import menu_event
 from test_audrey import show_img
+import time
+import pygame
+
+running = True
 
 while running :     # \ main game loop
     menu_event()   # \ Check for the user input and events

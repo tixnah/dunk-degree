@@ -68,26 +68,26 @@ return_menu_button_rect = pygame.Rect(830,529,237,66)
 
 # IN PARAMETER BUTTONS
 
-#MUSIC
+#MUSIC BUTTONS
 music_on_button_rect = pygame.Rect(829,189,76,41)
 # Button to have the music ON when it was OFF
 music_off_button_rect = pygame.Rect(1002,189,76,41)
 # Button to have the music OFF when it was ON
 
-#BALL
-violet_ball_button_rect = pygame.Rect(651,370,712,102)
+#BALL BUTTONS
+violet_ball_button_rect = pygame.Rect(651,370,115,102)
 # Select Purple Ball
-blue_ball_button_rect = pygame.Rect(824,370,712,102)
+blue_ball_button_rect = pygame.Rect(824,370,115,102)
 # Select Blue Ball
-orange_ball_button_rect = pygame.Rect(996,370,712,102)
+orange_ball_button_rect = pygame.Rect(996,370,115,102)
 # Select Orange Ball
 
-#AVATAR
+#AVATAR BUTTONS
 avatar_1_button_rect = pygame.Rect(89,243,115,178)
 # 1st avatar - at the left - Girl n°1
-avatar_1_button_rect = pygame.Rect(266,243,115,178)
+avatar_2_button_rect = pygame.Rect(266,243,115,178)
 # 2nd avatar - at the middle - Girl n°2
-avatar_1_button_rect = pygame.Rect(449,243,115,178)
+avatar_3_button_rect = pygame.Rect(449,243,115,178)
 # 3rd avatar - at the right - Boy
 
 
@@ -242,12 +242,16 @@ def menu_event ():
                 print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
 
-       # if current_screen in ["parameter_off", "parameter_on"]:
-        #    if avatar_1_button_rect.collidepoint(pos):
-
-         #   elif avatar_2_button_rect.collidepoint(pos):
-
-          #  elif avatat_3_button_rect.collidepoint(pos):
+        if current_screen in ["parameter_off", "parameter_on"]:
+            if avatar_1_button_rect.collidepoint(pos):
+                avatar = 1
+                print("\nAvatar 1 selected !\nReady to enter the Game ??\Let's Go !!")
+            elif avatar_2_button_rect.collidepoint(pos):
+                avatar = 2
+                print("\nAvatar 2 selected !\nReady to enter the Game ??\Let's Go !!")
+            elif avatat_3_button_rect.collidepoint(pos):
+                avatar = 3
+                print("\nAvatar 3 selected !\nReady to enter the Game ??\Let's Go !!")
 
 
 
