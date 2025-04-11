@@ -20,11 +20,11 @@ pygame.display.set_caption("Dunk & Degree")
 
 
 #Basket's image
-basket_img = pygame.image.load("basket.png").convert_alpha()
+basket_img = pygame.image.load("image/basket.png").convert_alpha()
 basket_img = pygame.transform.scale(basket_img, (200,150))
 
 #Ball's image
-ball_img = pygame.image.load("ball_orange.png").convert_alpha()
+ball_img = pygame.image.load("image/ball_orange.png").convert_alpha()
 ball_img = pygame.transform.scale(ball_img, (30,30))
 
 #Initials positions

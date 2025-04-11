@@ -20,8 +20,8 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 pygame.display.set_caption("Dunk & Degree")
 
-background = pygame.image.load("background.png")
-basket = pygame.image.load("basket.png")
+background = pygame.image.load("image/background.png")
+basket = pygame.image.load("image/basket.png")
 basket = pygame.transform.scale(basket, (400, 350))
 
 running = True

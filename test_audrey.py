@@ -22,15 +22,15 @@ pygame.display.set_caption("Dunk & Degree")
 
 # LOAD ALL THE IMAGES BACKGROUND
 
-menu = pygame.image.load("menu.png")
+menu = pygame.image.load("image/menu.png")
 # Load the image "menu.png" as the background named "menu"
-guide = pygame.image.load("guide.png")
+guide = pygame.image.load("image/guide.png")
 # Load the image "guide.png" as the background named "guide"
-game = pygame.image.load("background.png")
+game = pygame.image.load("image/background.png")
 # Load the image "background.png" as the background named "game"
-parameter_on = pygame.image.load("parama_on.png")
+parameter_on = pygame.image.load("image/parama_on.png")
 # Load the image "parama_on.png" as the background named "parameter_on"
-parameter_off = pygame.image.load("param_off.png")
+parameter_off = pygame.image.load("image/param_off.png")
 # Load the image "param_off.png" as the background named "parameter_off"
 
 
@@ -41,11 +41,11 @@ parameter_off = pygame.image.load("param_off.png")
 
 # LOAD ALL THE IMAGES OBJECTS
 
-ball_violet = pygame.image.load("ball_violet.png")
+ball_violet = pygame.image.load("image/ball_violet.png")
 # Load the image "ball_violet.png" as the background named "ball_violet"
-sheep_1 = pygame.image.load("mouton-face.png")
+sheep_1 = pygame.image.load("image/mouton-face.png")
 # Load the image "mouton-face.png" as the background named "sheep_1"
-click = pygame.image.load("click.png")
+click = pygame.image.load("image/click.png")
 click = pygame.transform.scale(click, (400, 350))
 # Load the image "click.png" as "click"
 
