@@ -10,3 +10,6 @@ while running :     # \ main game loop
 
 
 pygame.quit()   # \ Quit pygame properly
+
+
+
