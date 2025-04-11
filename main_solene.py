@@ -16,7 +16,6 @@ pygame.init()
 
 screen_width = 1200
 screen_height = 750
-screen = pygame.display.set_mode((screen_width, screen_height))
 
 pygame.display.set_caption("Dunk & Degree")
 
