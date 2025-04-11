@@ -2,6 +2,7 @@ import pygame
 import random
 import time
 import main_nour
+import main_audrey
 
 
 
@@ -41,5 +42,30 @@ while running :
 
 #End Nour's program
 
+
+
+# ball's library
+
+ball_orange_img = pygame.image.load ("ball_orange.png")
+ball_violet_img = pygame.image.load ("ball_violet.png")
+ball_blue_img = pygame.image.load ("image/ball_blue.png")
+
+
+# image chose
+
+
+
+
+
+
+# Initials positions
+
+ball_x = screen_width
+ball_y = screen_height
+
+
+
+
+# Easy : the basket doesn't move / 3 games
 
 
