@@ -100,7 +100,7 @@ running = True      # \ Game loop
 current_screen = "menu"
 pygame.display.set_caption("Dunk & Degree - Menu")
 
-def check_event ():
+def menu_event ():
     music = True
     avatar = 1
     ball = 1
@@ -304,11 +304,12 @@ def show_img():     # \ Function to display the images on the screen
 
 
 
-
+#from test_audrey import menu_event
+#from test_audrey import show_img
 
 
 while running :     # \ main game loop
-    check_event()   # \ Check for the user input and events
+    menu_event()   # \ Check for the user input and events
     show_img()      # \ Draw image on the screen
     pygame.display.flip()   # \ Update the display
 
