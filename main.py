@@ -4,6 +4,9 @@ import time
 import pygame
 
 running = True
+music = True
+avatar = 1
+ball = 1
 
 while running :     # \ main game loop
     menu_event()   # \ Check for the user input and events
