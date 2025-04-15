@@ -1,5 +1,6 @@
 import pygame
 # Import the pygame module
+from main_enora import *
 import time
 # Import time
 
@@ -97,6 +98,7 @@ quit_game_button_rect = pygame.Rect(1001,20,772,42)
 # GAME LOOP CONTROL
 running = True      # \ Game loop
 current_screen = "menu"
+game_launch = False
 pygame.display.set_caption("Dunk & Degree - Menu")
 
 
@@ -104,7 +106,7 @@ def menu_event ():
     music = True
     avatar = 1
     ball = 1
-    global running, current_screen  # \ Access the global 'running" variable
+    global running, current_screen, game_launch  # \ Access the global 'running" variable
     pos = None
 
     for event in pygame.event.get():    # \ Iterate through all pygame event
@@ -230,6 +232,8 @@ def menu_event ():
 
         # \ if we are in the game
         if current_screen == "game":
+            global game_launch
+            game_launch = True
 
             # \ if the click is on the button return menu
             if quit_game_button_rect.collidepoint(pos):
@@ -241,6 +245,8 @@ def menu_event ():
                 time.sleep(0.2)
                 print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                 print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
+
+            return game_launch
 
         if current_screen in ["parameter_off", "parameter_on"]:
             if avatar_1_button_rect.collidepoint(pos):
@@ -269,6 +275,8 @@ def menu_event ():
                 avatar_1_button_rect = pygame.Rect(266, 243, 115, 178)
                 # 2nd avatar - at the middle - Girl n°2
                 avatar_1_button_rect = pygame.Rect(449, 243, 115, 178)
+
+    return game_launch
 
 
 
@@ -310,8 +318,7 @@ def show_img():     # \ Function to display the images on the screen
 
 #from test_audrey import menu_event
 #from test_audrey import show_img
-
-
+'''
 while running :     # \ main game loop
     menu_event()   # \ Check for the user input and events
     show_img()      # \ Draw image on the screen
@@ -319,3 +326,4 @@ while running :     # \ main game loop
 
 
 pygame.quit()   # \ Quit pygame properly
+'''
