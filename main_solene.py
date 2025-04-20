@@ -3,28 +3,20 @@ import pygame
 pygame.init()
 
 # Game settings
-DURATION = 45  # duration in seconds
+DURATION = 60  # duration in seconds
 screen = pygame.display.set_mode((1200, 750))
-font = pygame.font.Font(None, 50)
-
-# Start Time
-start_time = pygame.time.get_ticks()
-
-import pygame
-
-pygame.init()
-
-screen_width = 1200
-screen_height = 750
-
 pygame.display.set_caption("Dunk & Degree")
 
+font = pygame.font.Font(None, 40)
+
+# Load images
 background = pygame.image.load("image/background.png")
 basket = pygame.image.load("image/basket.png")
 basket = pygame.transform.scale(basket, (400, 350))
 
+# Start Time
+start_time = pygame.time.get_ticks()
 running = True
-
 
 def check_event():
     global running
@@ -32,89 +24,93 @@ def check_event():
         if event.type == pygame.QUIT:
             running = False
 
-
-def show_img():
-    screen.blit(background, (0, 0))
-    screen.blit(basket, (850, 50))
-
-
 while running:
     check_event()
-    show_img()
-    pygame.display.flip()
 
-    #timer
-    elapsed_time = (pygame.time.get_ticks() - start_time) // 2500
+    # Draw background first
+    screen.blit(background, (0, 0))
 
-    # Check if the time is up
+    # Draw basket
+    screen.blit(basket, (850, 50))
+
+    # Timer
+    elapsed_time = (pygame.time.get_ticks() - start_time) // 1000
     if elapsed_time >= DURATION:
         print("⏳ Time's up! Game over !")
         running = False
 
-    # Show remaining time
-    time_text = font.render(f"Remaining Time : {DURATION - elapsed_time}s", True, (255, 255, 255))
+    # Draw timer text
+    time_text = font.render(f"Time : {DURATION - elapsed_time}s", True, (255, 255, 255))
     screen.blit(time_text, (40, 30))
 
+    # Update screen once
     pygame.display.flip()
 
 pygame.quit()
 
-"""
+# Score counter
+
+import pygame
+
+pygame.init()
+
+basket = pygame.transform.scale(basket, (400, 350))
+
+# Fonts
+font = pygame.font.Font(None, 50)
+
+# Ball position
+# ball_pos = ICI FAUT METTRE LIMAGE DE LA BALLE
+ball_pos.top = int(600, 500) # Starting position
+
+# Basket zone (hitbox) for scoring
+basket_zone = pygame.Rect(900, 200, 100, 30)  # Adjust this to fit your hoop
+
+# Score
+score = 0
+scored = False
+
+# Game loop
+clock = pygame.time.Clock()
 running = True
 while running:
-    screen.fill((0,0,0))  # Black Background
-    elapsed_time = (pygame.time.get_ticks() - start_time) // 1000
-
-    # Check if the time is up
-    if elapsed_time >= DURATION:
-        print("⏳ Time's up! Game over !")
-        running = False
-
-    # Show remaining time
-    time_text = font.render(f"Remaining Time : {DURATION - elapsed_time}s", True, (255, 255, 255))
-    screen.blit(time_text, (50, 50))
-
-    pygame.display.flip()
+    screen.blit(background, (0, 0))
+    screen.blit(basket, (850, 50))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+    # --- Ball movement (for test, arrow keys) ---
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        ball_pos.x -= 5
+    if keys[pygame.K_RIGHT]:
+        ball_pos.x += 5
+    if keys[pygame.K_UP]:
+        ball_pos.y -= 5
+    if keys[pygame.K_DOWN]:
+        ball_rect.y += 5
+
+    # --- Check collision with basket zone ---
+    if ball_pos.colliderect(basket_zone):
+        if not scored:
+            score += 1
+            scored = True
+    else:
+        scored = False  # Reset when ball leaves the zone
+
+    # Draw ball
+    screen.blit(ball_img, ball_rect)
+
+    # Draw score
+    score_text = font.render(f"Score : {score}", True, (255, 255, 255))
+    screen.blit(score_text, (40, 80))
+
+    # Optional: visualize the basket zone for debugging
+    # pygame.draw.rect(screen, (255, 0, 0), basket_zone, 2)
+
+    pygame.display.flip()
+    clock.tick(60)
+
 pygame.quit()
-
-# code for transparency and opacity of an image
-
-fond_color = (255,255,255)
-FPS = 30
-pygame.init()
-
-clock = pygame.time.Clock()
-
-fond_background = pygame.image.load("background.png")
-
-width, height = fond_background.get_size()
-
-window = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Dunk & Degree")
-window.fill(fond_color)
-
-fond_background = fond_background.convert()
-fond_background.set_alpha(127)
-
-background = pygame.image.load("background.png")
-background_alpha = background.copy()
-
-background = background.convert()
-background_alpha = background_alpha.convert_alpha()
-"""
-
-# Score counter
-
-def calculate_live_score(throws): # Calculates the total score based only on 1-point free throw & Increment score by 1
-    score = 0
-    if throws > 1 :
-        throws += 1
-    print("Score : ",score)
-
-
-# Main of score
