@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 pygame.display.set_caption("Dunk & Degree")
 
-background = pygame.image.load("background.png")
+background = pygame.image.load("image/background.png")
 basket = pygame.image.load("basket.png")
 
 running = True
@@ -21,7 +21,7 @@ def check_event ():
 
 def show_img():
     screen.blit(background, (0, 0))
-    screen.blit(basket, (1100, 700))
+    screen.blit(basket, (0, 0))
 
 while running :
     check_event()
