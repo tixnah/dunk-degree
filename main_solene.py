@@ -21,7 +21,7 @@ while running:
         running = False
 
     # Show remaining time
-    time_text = font.render(f"Temps restant: {DURATION - elapsed_time}s", True, (255, 255, 255))
+    time_text = font.render(f"Time left: {DURATION - elapsed_time}s", True, (255, 255, 255))
     screen.blit(time_text, (150, 180))
 
     pygame.display.flip()
