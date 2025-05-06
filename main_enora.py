@@ -47,7 +47,7 @@ def basket_hoop (difficulty_selector, level, score):
 
     if diff == "Normal" and level < max_level:
         basket_speed = 0.5
-        tmp = False
+
         if level == 0:
             if basket_x >= 800:
                 basket_direction = -1
@@ -57,20 +57,15 @@ def basket_hoop (difficulty_selector, level, score):
             basket_x += basket_direction * basket_speed
 
 
-
-
         if level == 1:
-            basket_speed = 1
-            tmp = False
+            basket_speed = 0.5
 
-            basket_y += basket_direction * basket_speed
-
-            if basket_y >= 500:
-                basket_y = 500
+            if basket_y >= 350:
                 basket_direction = -1
-            elif basket_y <= 100:
-                basket_y = 100
 
+            elif basket_y <= 100:
+                basket_direction = 1
+            basket_y += basket_direction * basket_speed
 
         if level == 2:
             tmp = False
