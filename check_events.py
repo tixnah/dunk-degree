@@ -1,5 +1,6 @@
 import pygame
 import time
+from main_enora import*
 
 pygame.init()
 # Initialize all pygame modules
@@ -248,3 +249,25 @@ def show_img():     # Function to display the images on the screen
 
     if current_screen == "parameter_off":
         screen.blit(parameter_off, (0, 0))     # Draw the background "parameter_off" at position (0,0)
+
+
+
+
+running = True
+
+difficulty_selector = 1
+
+level = 1
+score = 0
+
+while running :     # \ main game loop
+
+    running, game_launched = menu_event()   # \ Check for the user input and events
+    show_img()      # \ Draw image on the screen
+
+    if game_launched:
+        difficulty_selector, level = basket_hoop(difficulty_selector, level, score)  # \ Move basket
+
+    pygame.display.flip()   # \ Update the display
+
+pygame.quit()   # \ Quit pygame properly

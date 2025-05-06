@@ -1,4 +1,5 @@
 import pygame
+import time
 
 #  Initialisation of Pygame
 pygame.init()
@@ -31,9 +32,10 @@ difficulty_level = {
 difficulty = ["Easy", "Normal", "Intermediate", "Difficult"]
 basket_x = 800
 basket_y = 100
+basket_direction = -1
 
 def basket_hoop (difficulty_selector, level, score):
-    global screen
+    global screen, basket_x, basket_y, basket_direction
 
     diff = difficulty[difficulty_selector]
 
@@ -43,34 +45,52 @@ def basket_hoop (difficulty_selector, level, score):
     else :
         max_level = 5
 
-
     if diff == "Normal" and level < max_level:
-        basket_speed = 1
+        basket_speed = 0.5
+        tmp = False
         if level == 0:
-            if basket_x<=600:
-                basket_x += basket_speed
-            elif basket_x>=800:
-                basket_x -= basket_speed
+            if basket_x >= 800:
+                basket_direction = -1
+
+            elif basket_x <= 600:
+                basket_direction = 1
+            basket_x += basket_direction * basket_speed
+
+
 
 
         if level == 1:
-            if basket_y<=600:
-                basket_y += basket_speed
-            elif basket_y>=800:
-                basket_y -= basket_speed
+            basket_speed = 1
+            tmp = False
+
+            basket_y += basket_direction * basket_speed
+
+            if basket_y >= 500:
+                basket_y = 500
+                basket_direction = -1
+            elif basket_y <= 100:
+                basket_y = 100
+
 
         if level == 2:
-            while not score :
-                for i in range (1):
-                    if basket_x <= 600:
-                        basket_x += basket_speed
-                    elif basket_x >= 800:
-                        basket_x -= basket_speed
-                for i in range (1):
-                    if basket_y <= 600:
-                        basket_y += basket_speed
-                    elif basket_y >= 800:
-                        basket_y -= basket_speed
+            tmp = False
+            if not tmp:
+                if basket_x > 600 :
+                    basket_x -= basket_speed
+                if basket_x<=600:
+                    basket_x += basket_speed
+                if basket_x == 800 :
+                    tmp = True
+
+            elif tmp:
+                if basket_y > 200:
+                    basket_y -= basket_speed
+                if basket_y <= 200:
+                    basket_y += basket_speed
+                if basket_y == 100:
+                    tmp = False
+
+
 
 
 
@@ -80,8 +100,6 @@ def basket_hoop (difficulty_selector, level, score):
         basket_x = 800
         basket_y = 100
         basket_speed = 2
-
-
 
 
     if diff == "Difficult" and level < max_level :
