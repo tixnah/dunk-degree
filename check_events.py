@@ -31,6 +31,39 @@ parameter_on = pygame.image.load("image/parameter_on.png")
 parameter_off = pygame.image.load("image/parameter_off.png")
 # Load the image "parameter_off.png" as the background named "parameter_off"
 
+
+# LOAD THE OVERLAY IMAGES
+
+violet_ball = pygame.image.load("image_menu/violet_ball.png")
+# Select Purple Ball
+blue_ball = pygame.image.load("image_menu/blue_ball.png")
+# Select Blue Ball
+orange_ball = pygame.image.load("image_menu/orange_ball.png")
+# Select Orange Ball
+
+selected_violet_ball = pygame.image.load("image_menu/selected_violet_ball.png")
+# Select Purple Ball
+selected_blue_ball = pygame.image.load("image_menu/selected_blue_ball.png")
+# Select Blue Ball
+selected_orange_ball = pygame.image.load("image_menu/selected_orange_ball.png")
+# Select Orange Ball
+
+
+#AVATAR BUTTONS
+avatar_1 = pygame.image.load("image_menu/avatar_1.png")
+# 1st avatar - at the left - Girl n 1
+avatar_2 = pygame.image.load("image_menu/avatar_2.png")
+# 2nd avatar - at the middle - Girl n 2
+avatar_3 = pygame.image.load("image_menu/avatar_3.png")
+# 3rd avatar - at the right - Boy
+
+selected_avatar_1 = pygame.image.load("image_menu/selected_avatar_1.png")
+# 1st avatar - at the left - Girl n 1
+selected_avatar_2 = pygame.image.load("image_menu/selected_avatar_2.png")
+# 2nd avatar - at the middle - Girl n 2
+selected_avatar_3 = pygame.image.load("image_menu/selected_avatar_3.png")
+# 3rd avatar - at the right - Boy
+
 ##############################################################
 #REMEMBER TO ADD IN THE DEF SHOW_ING - AT THE END OF THE CODE
 ##############################################################
@@ -72,19 +105,19 @@ music_off_button_rect = pygame.Rect(1002,189,76,41)
 # Button to have the music OFF when it was ON
 
 #BALL BUTTONS
-violet_ball_button_rect = pygame.Rect(651,370,115,102)
+violet_ball_button_rect = pygame.Rect(636,354,140,134)
 # Select Purple Ball
-blue_ball_button_rect = pygame.Rect(824,370,115,102)
+blue_ball_button_rect = pygame.Rect(810,354,140,134)
 # Select Blue Ball
-orange_ball_button_rect = pygame.Rect(996,370,115,102)
+orange_ball_button_rect = pygame.Rect(985,354,140,134)
 # Select Orange Ball
 
 #AVATAR BUTTONS
-avatar_1_button_rect = pygame.Rect(89,243,115,178)
+avatar_1_button_rect = pygame.Rect(66,238,155,205)
 # 1st avatar - at the left - Girl n 1
-avatar_2_button_rect = pygame.Rect(266,243,115,178)
+avatar_2_button_rect = pygame.Rect(239,238,155,205)
 # 2nd avatar - at the middle - Girl n 2
-avatar_3_button_rect = pygame.Rect(449,243,115,178)
+avatar_3_button_rect = pygame.Rect(411,238,155,205)
 # 3rd avatar - at the right - Boy
 
 
@@ -248,3 +281,16 @@ def show_img():     # Function to display the images on the screen
 
     if current_screen == "parameter_off":
         screen.blit(parameter_off, (0, 0))     # Draw the background "parameter_off" at position (0,0)
+
+
+while running :     # \ main game loop
+
+    running, game_launched = menu_event()   # \ Check for the user input and events
+    show_img()      # \ Draw image on the screen
+
+    if game_launched:
+        difficulty_selector, level = basket_hoop(difficulty_selector, level, score)  # \ Move basket
+
+    pygame.display.flip()   # \ Update the display
+
+pygame.quit()   # \ Quit pygame properly
