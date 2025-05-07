@@ -85,8 +85,8 @@ selected_orange_ball = pygame.transform.scale(pygame.image.load("image_menu/sele
 
 # CHANGE THE SIZE OF THE AVATAR
 
-AVATAR_WIDTH = 155
-AVATAR_HEIGHT = 206
+AVATAR_WIDTH = 130
+AVATAR_HEIGHT = 140
 
 avatar_1 = pygame.transform.scale(pygame.image.load("image_menu/avatar_1.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
 selected_avatar_1 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_1.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
