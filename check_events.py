@@ -53,6 +53,7 @@ selected_orange_ball = pygame.image.load("image_menu/selected_orange_ball.png")
 # Select Orange Ball
 
 
+
 #AVATAR BUTTONS
 avatar_1 = pygame.image.load("image_menu/avatar_1.png")
 # 1st avatar - at the left - Girl n 1
@@ -69,35 +70,6 @@ selected_avatar_3 = pygame.image.load("image_menu/selected_avatar_3.png")
 # 3rd avatar - at the right - Boy
 
 
-# CHANGE THE SIZE OF THE BALL
-
-BALL_WIDTH = 140
-BALL_HEIGH = 149
-
-violet_ball = pygame.transform.scale(pygame.image.load("image_menu/violet_ball.png"),(BALL_WIDTH,BALL_HEIGH))
-selected_violet_ball = pygame.transform.scale(pygame.image.load("image_menu/selected_violet_ball.png"),(BALL_WIDTH,BALL_HEIGH))
-
-blue_ball = pygame.transform.scale(pygame.image.load("image_menu/blue_ball.png"),(BALL_WIDTH,BALL_HEIGH))
-selected_blue_ball = pygame.transform.scale(pygame.image.load("image_menu/selected_blue_ball.png"),(BALL_WIDTH,BALL_HEIGH))
-
-orange_ball = pygame.transform.scale(pygame.image.load("image_menu/orange_ball.png"),(BALL_WIDTH,BALL_HEIGH))
-selected_orange_ball = pygame.transform.scale(pygame.image.load("image_menu/selected_orange_ball.png"),(BALL_WIDTH,BALL_HEIGH))
-
-# CHANGE THE SIZE OF THE AVATAR
-
-AVATAR_WIDTH = 130
-AVATAR_HEIGHT = 140
-
-avatar_1 = pygame.transform.scale(pygame.image.load("image_menu/avatar_1.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
-selected_avatar_1 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_1.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
-
-avatar_2 = pygame.transform.scale(pygame.image.load("image_menu/avatar_2.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
-selected_avatar_2 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_2.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
-
-avatar_3 = pygame.transform.scale(pygame.image.load("image_menu/avatar_3.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
-selected_avatar_3 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_3.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
-
-
 # LOAD ALL THE IMAGES OBJECTS
 
 ball_violet = pygame.image.load("image/ball_violet.png")
@@ -107,6 +79,10 @@ sheep_1 = pygame.image.load("image/mouton-face.png")
 click = pygame.image.load("image/click.png")
 click = pygame.transform.scale(click, (400, 350))
 # Load the image "click.png" as "click"
+
+
+
+
 
 
 # DEFINE THE BUTTONS
