@@ -69,6 +69,35 @@ selected_avatar_3 = pygame.image.load("image_menu/selected_avatar_3.png")
 # 3rd avatar - at the right - Boy
 
 
+# CHANGE THE SIZE OF THE BALL
+
+BALL_WIDTH = 140
+BALL_HEIGH = 149
+
+violet_ball = pygame.transform.scale(pygame.image.load("image_menu/violet_ball.png"),(BALL_WIDTH,BALL_HEIGH))
+selected_violet_ball = pygame.transform.scale(pygame.image.load("image_menu/selected_violet_ball.png"),(BALL_WIDTH,BALL_HEIGH))
+
+blue_ball = pygame.transform.scale(pygame.image.load("image_menu/blue_ball.png"),(BALL_WIDTH,BALL_HEIGH))
+selected_blue_ball = pygame.transform.scale(pygame.image.load("image_menu/selected_blue_ball.png"),(BALL_WIDTH,BALL_HEIGH))
+
+orange_ball = pygame.transform.scale(pygame.image.load("image_menu/orange_ball.png"),(BALL_WIDTH,BALL_HEIGH))
+selected_orange_ball = pygame.transform.scale(pygame.image.load("image_menu/selected_orange_ball.png"),(BALL_WIDTH,BALL_HEIGH))
+
+# CHANGE THE SIZE OF THE AVATAR
+
+AVATAR_WIDTH = 155
+AVATAR_HEIGHT = 206
+
+avatar_1 = pygame.transform.scale(pygame.image.load("image_menu/avatar_1.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
+selected_avatar_1 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_1.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
+
+avatar_2 = pygame.transform.scale(pygame.image.load("image_menu/avatar_2.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
+selected_avatar_2 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_2.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
+
+avatar_3 = pygame.transform.scale(pygame.image.load("image_menu/avatar_3.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
+selected_avatar_3 = pygame.transform.scale(pygame.image.load("image_menu/selected_avatar_3.png"),(AVATAR_WIDTH,AVATAR_HEIGHT))
+
+
 # LOAD ALL THE IMAGES OBJECTS
 
 ball_violet = pygame.image.load("image/ball_violet.png")
@@ -127,6 +156,9 @@ quit_game_button_rect = pygame.Rect(1001,20,772,42)
 # GAME LOOP CONTROL
 running = True      # Game loop
 game_launched = False
+avatar = 1
+ball = 1
+music = True
 current_screen = "menu"
 pygame.display.set_caption("Dunk & Degree - Menu")
 
@@ -134,10 +166,7 @@ pygame.display.set_caption("Dunk & Degree - Menu")
 
 
 def menu_event ():
-    global running, current_screen, game_launched  # \ Access the global 'running" variable
-    music = True
-    avatar = 1
-    ball = 1
+    global running, current_screen, game_launched, avatar, ball, music  # \ Access the global 'running' variable
     pos = None
 
     for event in pygame.event.get():    # \ Iterate through all pygame event
@@ -190,8 +219,7 @@ def menu_event ():
 
             #GESTION IN THE GUIDE
             # if we are in the guide
-            if current_screen == "guide":
-                # if the click is on the button return menu
+            if current_screen == "guide": # if the click is on the button return menu
                 if return_menu_button_rect.collidepoint(pos):
                     current_screen = "menu"
                     pygame.display.flip()  # Refresh the image
@@ -205,31 +233,6 @@ def menu_event ():
             #GESTION OF THE PARAMETER
             #if we are in the parameter
             if current_screen in ["parameter_on", "parameter_off"]:
-                if avatar == 1:
-                    screen.blit(selected_avatar_1, (66, 238))
-                    screen.blit(avatar_2, (239, 238))
-                    screen.blit(avatar_3, (411, 238))
-                elif avatar == 2:
-                    screen.blit(avatar_1, (66, 238))
-                    screen.blit(selected_avatar_2, (239, 238))
-                    screen.blit(avatar_3, (411, 238))
-                elif avatar == 3:
-                    screen.blit(avatar_1, (66, 238))
-                    screen.blit(avatar_2, (239, 238))
-                    screen.blit(selected_avatar_3, (411, 238))
-
-                if ball == 1:
-                    screen.blit(selected_violet_ball, (636, 354))
-                    screen.blit(blue_ball, (810, 354))
-                    screen.blit(orange_ball, (985, 354))
-                elif ball == 2:
-                    screen.blit(violet_ball, (636, 354))
-                    screen.blit(selected_blue_ball, (810, 354))
-                    screen.blit(orange_ball, (985, 354))
-                elif ball == 3:
-                    screen.blit(violet_ball, (636, 354))
-                    screen.blit(selected_blue_ball, (810, 354))
-                    screen.blit(selected_orange_ball, (985, 354))
                 if return_menu_button_rect.collidepoint(pos):
                     current_screen = "menu"
                     pygame.display.flip()  # Refresh the image
@@ -307,7 +310,35 @@ def show_img():     # Function to display the images on the screen
     if current_screen == "parameter_off":
         screen.blit(parameter_off, (0, 0))     # Draw the background "parameter_off" at position (0,0)
 
+def show_overlay():
+    if current_screen in ["parameter_on", "parameter_off"]:
+        # show the avatars
+        if avatar == 1:
+            screen.blit(selected_avatar_1, (66, 238))
+            screen.blit(avatar_2, (239, 238))
+            screen.blit(avatar_3, (411, 238))
+        elif avatar == 2:
+            screen.blit(avatar_1, (66, 238))
+            screen.blit(selected_avatar_2, (239, 238))
+            screen.blit(avatar_3, (411, 238))
+        elif avatar == 3:
+            screen.blit(avatar_1, (66, 238))
+            screen.blit(avatar_2, (239, 238))
+            screen.blit(selected_avatar_3, (411, 238))
 
+        #show the balls
+        if ball == 1:
+            screen.blit(selected_violet_ball, (636, 354))
+            screen.blit(blue_ball, (810, 354))
+            screen.blit(orange_ball, (985, 354))
+        elif ball == 2:
+            screen.blit(violet_ball, (636, 354))
+            screen.blit(selected_blue_ball, (810, 354))
+            screen.blit(orange_ball, (985, 354))
+        elif ball == 3:
+            screen.blit(violet_ball, (636, 354))
+            screen.blit(blue_ball, (810, 354))
+            screen.blit(selected_orange_ball, (985, 354))
 
 
 running = True
@@ -317,14 +348,15 @@ difficulty_selector = 1
 level = 1
 score = 0
 
-while running :     # \ main game loop
+while running :     # main game loop
 
-    running, game_launched = menu_event()   # \ Check for the user input and events
-    show_img()      # \ Draw image on the screen
+    running, game_launched = menu_event()   # Check for the user input and events
+    show_img()      # Draw image on the screen
+    show_overlay()  # Draw the case of the avatars and balls
 
     if game_launched:
-        difficulty_selector, level = basket_hoop(difficulty_selector, level, score)  # \ Move basket
+        difficulty_selector, level = basket_hoop(difficulty_selector, level, score)  # Move basket
 
-    pygame.display.flip()   # \ Update the display
+    pygame.display.flip()   # Update the display
 
-pygame.quit()   # \ Quit pygame properly
+pygame.quit()   # Quit pygame properly
