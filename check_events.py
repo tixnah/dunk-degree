@@ -36,6 +36,38 @@ parameter_off = pygame.image.load("image/parameter_off.png")
 #REMEMBER TO ADD IN THE DEF SHOW_ING - AT THE END OF THE CODE
 ##############################################################
 
+# LOAD THE OVERLAY IMAGES
+
+violet_ball = pygame.image.load("image_menu/violet_ball.png")
+# Select Purple Ball
+blue_ball = pygame.image.load("image_menu/blue_ball.png")
+# Select Blue Ball
+orange_ball = pygame.image.load("image_menu/orange_ball.png")
+# Select Orange Ball
+
+selected_violet_ball = pygame.image.load("image_menu/selected_violet_ball.png")
+# Select Purple Ball
+selected_blue_ball = pygame.image.load("image_menu/selected_blue_ball.png")
+# Select Blue Ball
+selected_orange_ball = pygame.image.load("image_menu/selected_orange_ball.png")
+# Select Orange Ball
+
+
+#AVATAR BUTTONS
+avatar_1 = pygame.image.load("image_menu/avatar_1.png")
+# 1st avatar - at the left - Girl n 1
+avatar_2 = pygame.image.load("image_menu/avatar_2.png")
+# 2nd avatar - at the middle - Girl n 2
+avatar_3 = pygame.image.load("image_menu/avatar_3.png")
+# 3rd avatar - at the right - Boy
+
+selected_avatar_1 = pygame.image.load("image_menu/selected_avatar_1.png")
+# 1st avatar - at the left - Girl n 1
+selected_avatar_2 = pygame.image.load("image_menu/selected_avatar_2.png")
+# 2nd avatar - at the middle - Girl n 2
+selected_avatar_3 = pygame.image.load("image_menu/selected_avatar_3.png")
+# 3rd avatar - at the right - Boy
+
 
 # LOAD ALL THE IMAGES OBJECTS
 
@@ -173,6 +205,31 @@ def menu_event ():
             #GESTION OF THE PARAMETER
             #if we are in the parameter
             if current_screen in ["parameter_on", "parameter_off"]:
+                if avatar == 1:
+                    screen.blit(selected_avatar_1, (66, 238))
+                    screen.blit(avatar_2, (239, 238))
+                    screen.blit(avatar_3, (411, 238))
+                elif avatar == 2:
+                    screen.blit(avatar_1, (66, 238))
+                    screen.blit(selected_avatar_2, (239, 238))
+                    screen.blit(avatar_3, (411, 238))
+                elif avatar == 3:
+                    screen.blit(avatar_1, (66, 238))
+                    screen.blit(avatar_2, (239, 238))
+                    screen.blit(selected_avatar_3, (411, 238))
+
+                if ball == 1:
+                    screen.blit(selected_violet_ball, (636, 354))
+                    screen.blit(blue_ball, (810, 354))
+                    screen.blit(orange_ball, (985, 354))
+                elif ball == 2:
+                    screen.blit(violet_ball, (636, 354))
+                    screen.blit(selected_blue_ball, (810, 354))
+                    screen.blit(orange_ball, (985, 354))
+                elif ball == 3:
+                    screen.blit(violet_ball, (636, 354))
+                    screen.blit(selected_blue_ball, (810, 354))
+                    screen.blit(selected_orange_ball, (985, 354))
                 if return_menu_button_rect.collidepoint(pos):
                     current_screen = "menu"
                     pygame.display.flip()  # Refresh the image
