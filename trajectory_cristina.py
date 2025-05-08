@@ -49,5 +49,5 @@ def handle_ball():
         update_ball()
         draw_ball(pygame.display.get_surface())
 
-        if ball_y > 720 or ball_x > 1280:
+        if ball_y > 675 or ball_x > 1200:
             ball_active = False
