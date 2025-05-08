@@ -319,9 +319,9 @@ def show_overlay():
 
 running = True
 
-difficulty_selector = 1
+difficulty_selector = 3
 
-level = 1
+level = 4
 score = 0
 
 while running :     # main game loop
