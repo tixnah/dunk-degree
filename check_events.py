@@ -1,5 +1,5 @@
 import time
-from main_enora import*
+from level import*
 
 pygame.init()
 # Initialize all pygame modules
@@ -314,24 +314,3 @@ def show_overlay():
             screen.blit(violet_ball, (636, 354))
             screen.blit(blue_ball, (810, 354))
             screen.blit(selected_orange_ball, (985, 354))
-
-
-running = True
-
-difficulty_selector = 3
-
-level = 4
-score = 0
-
-while running :     # main game loop
-
-    running, game_launched = menu_event()   # Check for the user input and events
-    show_img()      # Draw image on the screen
-    show_overlay()  # Draw the case of the avatars and balls
-
-    if game_launched:
-        difficulty_selector, level = basket_hoop(difficulty_selector, level, score)  # Move basket
-
-    pygame.display.flip()   # Update the display
-
-pygame.quit()   # Quit pygame properly
