@@ -293,8 +293,8 @@ def basket_hoop (difficulty_selector, level, score):
         if level == 4 : #hexagone
             if state == "horizontal_left":
                 basket_x += basket_direction * basket_speed
-                if basket_x <= 650:
-                    basket_x = 650
+                if basket_x <= 800:
+                    basket_x = 800
                     state = "vertical_down1"
                     basket_direction = 1
 
@@ -316,8 +316,8 @@ def basket_hoop (difficulty_selector, level, score):
 
             elif state == "horizontal_right":
                 basket_x += basket_direction * basket_speed
-                if basket_x >= 850:
-                    basket_x = 850
+                if basket_x >= 900:
+                    basket_x = 900
                     state = "vertical_up1"
                     basket_direction = -1
 
