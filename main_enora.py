@@ -1,5 +1,4 @@
 import pygame
-import time
 
 #  Initialisation of Pygame
 pygame.init()
@@ -13,7 +12,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 # Create the game window
 
 basket_img = pygame.image.load("image/basket.png").convert_alpha()
-basket_img = pygame.transform.smoothscale(basket_img, (400, 350))
+basket_img = pygame.transform.smoothscale(basket_img, (200, 175))
 
 #Level's parameter
 
@@ -30,8 +29,8 @@ difficulty_level = {
 }
 """
 difficulty = ["Easy", "Normal", "Intermediate", "Difficult"]
-basket_x = 750
-basket_y = 100
+basket_x = 900
+basket_y = 175
 basket_direction = -1
 state = "horizontal_left"
 
@@ -55,10 +54,10 @@ def basket_hoop (difficulty_selector, level, score):
         basket_speed = 0.5
 
         if level == 0:
-            if basket_x >= 800:
+            if basket_x >= 900:
                 basket_direction = -1
 
-            elif basket_x <= 600:
+            elif basket_x <= 700:
                 basket_direction = 1
             basket_x += basket_direction * basket_speed
 
@@ -67,36 +66,36 @@ def basket_hoop (difficulty_selector, level, score):
             if basket_y >= 350:
                 basket_direction = -1
 
-            elif basket_y <= 100:
+            elif basket_y <= 175:
                 basket_direction = 1
             basket_y += basket_direction * basket_speed
 
         if level == 2:
             if state == "horizontal_left":
                 basket_x += basket_direction * basket_speed
-                if basket_x <= 600:
-                    basket_x = 600
+                if basket_x <= 700:
+                    basket_x = 700
                     state = "horizontal_right"
                     basket_direction = 1  # vers le bas
 
             elif state == "vertical_down":
                 basket_y += basket_direction * basket_speed
-                if basket_y >= 350:
-                    basket_y = 350
+                if basket_y >= 400:
+                    basket_y = 400
                     state = "vertical_up"
                     basket_direction = -1  # vers le haut
 
             elif state == "vertical_up":
                 basket_y += basket_direction * basket_speed
-                if basket_y <= 100:
-                    basket_y = 100
+                if basket_y <= 175:
+                    basket_y = 175
                     state = "horizontal_left"
                     basket_direction = -1  # vers la gauche
 
             elif state == "horizontal_right":
                 basket_x += basket_direction * basket_speed
-                if basket_x >= 800:
-                    basket_x = 800
+                if basket_x >= 900:
+                    basket_x = 900
                     state = "vertical_down"
                     basket_direction = 1  # vers le bas
 
@@ -111,7 +110,7 @@ def basket_hoop (difficulty_selector, level, score):
 
 
         if level == 0:
-            if basket_x >= 800:
+            if basket_x >= 900:
                 basket_direction = -1
 
             elif basket_x <= 600:
@@ -138,22 +137,22 @@ def basket_hoop (difficulty_selector, level, score):
 
             elif state == "vertical_down":
                 basket_y += basket_direction * basket_speed
-                if basket_y >= 350:
-                    basket_y = 350
+                if basket_y >= 400:
+                    basket_y = 400
                     state = "vertical_up"
                     basket_direction = -1  # vers le haut
 
             elif state == "vertical_up":
                 basket_y += basket_direction * basket_speed
-                if basket_y <= 100:
-                    basket_y = 100
+                if basket_y <= 175:
+                    basket_y = 175
                     state = "horizontal_left"
                     basket_direction = -1  # vers la gauche
 
             elif state == "horizontal_right":
                 basket_x += basket_direction * basket_speed
-                if basket_x >= 800:
-                    basket_x = 800
+                if basket_x >= 900:
+                    basket_x = 900
                     state = "vertical_down"
                     basket_direction = 1  # vers le bas
 
@@ -187,32 +186,32 @@ def basket_hoop (difficulty_selector, level, score):
         basket_speed = 2
 
 
-        if level == 0 : #diagonale
+        if level == 0 : #T
             if state == "horizontal_left":
                 basket_x += basket_direction * basket_speed
-                if basket_x <= 600:
-                    basket_x = 600
+                if basket_x <= 700:
+                    basket_x = 700
                     state = "horizontal_right"
                     basket_direction = 1  # vers la droite
 
             elif state == "vertical_down":
                 basket_y += basket_direction * basket_speed
-                if basket_y >= 350:
-                    basket_y = 350
+                if basket_y >= 175:
+                    basket_y = 175
                     state = "vertical_up"
                     basket_direction = -1  # vers le haut
 
             elif state == "vertical_up":
                 basket_y += basket_direction * basket_speed
-                if basket_y <= 100:
-                    basket_y = 100
+                if basket_y <= 175:
+                    basket_y = 175
                     state = "horizontal_left"
                     basket_direction = -1  # vers la gauche
 
             elif state == "horizontal_right":
                 basket_x += basket_direction * basket_speed
-                if basket_x >= 800:
-                    basket_x = 800
+                if basket_x >= 900:
+                    basket_x = 900
                     state = "vertical_down"
                     basket_direction = 1  # vers le bas
 
@@ -237,23 +236,23 @@ def basket_hoop (difficulty_selector, level, score):
             if state == "vertical_down":
                 basket_y -= basket_direction * basket_speed
                 basket_x += 0.5 * basket_direction * basket_speed
-                if basket_y >= 350:
-                    basket_y = 350
+                if basket_y >= 400:
+                    basket_y = 400
                     state = "horizontal_right"
                     basket_direction = -1
 
             if state == "horizontal_right":
                 basket_x -= basket_direction * basket_speed
-                if basket_x >= 800:
-                    basket_x = 800
+                if basket_x >= 900:
+                    basket_x = 900
                     state = "vertical_up"
                     basket_direction = 1
 
             if state == "vertical_up":
                 basket_y -= basket_direction * basket_speed
                 basket_x -= 0.5 * basket_direction * basket_speed
-                if basket_y <= 100:
-                    basket_y = 100
+                if basket_y <= 175:
+                    basket_y = 175
                     state = "vertical_down"
                     basket_direction = -1  # vers la gauche
 
@@ -262,29 +261,29 @@ def basket_hoop (difficulty_selector, level, score):
         if level == 3: #carré
             if state == "horizontal_left":
                 basket_x += basket_direction * basket_speed
-                if basket_x <= 600:
-                    basket_x = 600
+                if basket_x <= 700:
+                    basket_x = 700
                     state = "vertical_down"
                     basket_direction = 1
 
             elif state == "vertical_down":
                 basket_y += basket_direction * basket_speed
-                if basket_y >= 350:
-                    basket_y = 350
+                if basket_y >= 400:
+                    basket_y = 400
                     state = "horizontal_right"
                     basket_direction = 1
 
             elif state == "horizontal_right":
                 basket_x += basket_direction * basket_speed
-                if basket_x >= 800:
-                    basket_x = 800
+                if basket_x >= 900:
+                    basket_x = 900
                     state = "vertical_up"
                     basket_direction = -1
 
             elif state == "vertical_up":
                 basket_y += basket_direction * basket_speed
-                if basket_y <= 100:
-                    basket_y = 100
+                if basket_y <= 175:
+                    basket_y = 175
                     state = "horizontal_left"
                     basket_direction = -1
 
