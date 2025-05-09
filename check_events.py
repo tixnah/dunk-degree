@@ -1,4 +1,3 @@
-import pygame
 import time
 from level import*
 
@@ -71,9 +70,18 @@ selected_avatar_3 = pygame.image.load("image_menu/selected_avatar_3.png")
 
 
 # LOAD ALL THE IMAGES OBJECTS
+
+ball_violet = pygame.image.load("image/ball_violet.png")
+# Load the image "ball_violet.png" as the background named "ball_violet"
+sheep_1 = pygame.image.load("image/mouton-face.png")
+# Load the image "mouton-face.png" as the background named "sheep_1"
 click = pygame.image.load("image/click.png")
 click = pygame.transform.scale(click, (400, 350))
 # Load the image "click.png" as "click"
+
+
+
+
 
 
 # DEFINE THE BUTTONS
@@ -128,6 +136,8 @@ ball = 1
 music = True
 current_screen = "menu"
 pygame.display.set_caption("Dunk & Degree - Menu")
+
+
 
 
 def menu_event ():
@@ -304,22 +314,3 @@ def show_overlay():
             screen.blit(violet_ball, (636, 354))
             screen.blit(blue_ball, (810, 354))
             screen.blit(selected_orange_ball, (985, 354))
-
-
-difficulty_selector = 0
-
-level = 0
-score = 0
-
-while running :     # main game loop
-
-    running, game_launched = menu_event()   # Check for the user input and events
-    show_img()      # Draw image on the screen
-    show_overlay()  # Draw the case of the avatars and balls
-
-    if game_launched:
-        difficulty_selector, level = basket_hoop(difficulty_selector, level, score)  # Move basket
-
-    pygame.display.flip()   # Update the display
-
-pygame.quit()   # Quit pygame properly
