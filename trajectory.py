@@ -2,6 +2,24 @@ import pygame
 import os
 import math
 
+def load_avatar(avatar):
+    if avatar == 2:
+        avatar = {
+            "side": pygame.transform.scale(pygame.image.load("image/perso1side.png").convert_alpha(),(200,200)),
+            "lance": pygame.transform.scale(pygame.image.load("image/perso1lance.png").convert_alpha(),(200,200)),
+        }
+    elif avatar == 1:
+        avatar = {
+            "side": pygame.transform.scale(pygame.image.load("image/pers2side.png").convert_alpha(),(200,200)),
+            "lance": pygame.transform.scale(pygame.image.load("image/pers2lance.png").convert_alpha(),(200,200)),
+        }
+    elif avatar ==3:
+        avatar = {
+            "side": pygame.transform.scale(pygame.image.load("image/pers3side.png").convert_alpha(),(200,200)),
+            "lance": pygame.transform.scale(pygame.image.load("image/pers3lance.png").convert_alpha(),(200,200)),
+        }
+    return avatar
+
 def load_ball_frames(image_folder, frame_count=15, scale=(90, 100)):
     return [
         pygame.transform.scale(
@@ -27,9 +45,11 @@ def reset_ball_state(screen_width, screen_height):
         "gravity": 0.5,
         "shooting": False,
         "animation_done": False,
+        "x_avatar" :0,
+        "y_avatar" : screen_height - 220,
     }
 
-def update_ball(state, screen_width, screen_height):
+def update_ball(state, screen_width, screen_height, image_folder):
     if not state["shooting"] or state["animation_done"]:
         return
 
@@ -45,12 +65,17 @@ def update_ball(state, screen_width, screen_height):
     state["y"] = state["start_y"] - (state["velocity"] * state["t"] * math.sin(state["angle"]) - state["gravity"] * state["t"]**2)
 
     if state["x"] > screen_width or state["y"] > screen_height:
-        state["animation_done"] = True
+        # Réinitialise totalement la balle
+        new_state = reset_ball_state(screen_width, screen_height)
+        new_state["frames"] = load_ball_frames(image_folder)
+        state.clear()
+        state.update(new_state)
 
-def draw_ball(screen, state):
+def draw_ball(screen, state,avatar):
     if state["frames"]:
         frame = state["frames"][state["frame_index"]]
         screen.blit(frame, (state["x"], state["y"]))
+    screen.blit(avatar["lance"], (state["x_avatar"], state["y_avatar"]))
 
 def launch_ball(state):
     if not state["shooting"]:
