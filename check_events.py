@@ -1,7 +1,9 @@
 import pygame
 import time
 from trajectory import launch_ball, adjust_ball_angle, adjust_ball_velocity
+import sound_manager  # Assurez-vous que sound_manager est importé
 
+# ... (chargements _raw et variables d'images converties comme avant) ...
 menu_bg_raw = pygame.image.load("image/menu.png");
 guide_bg_raw = pygame.image.load("image/guide.png")
 game_bg_raw = pygame.image.load("image/background.png");
@@ -68,14 +70,19 @@ quit_game_button_rect = pygame.Rect(1001, 20, 172, 42)
 _internal_running = True;
 _internal_game_launched = False;
 _internal_avatar = 1
-_internal_ball_path = "image/frames-purple-ball";
-_internal_music = True;
+_internal_ball_path = "image/frames-purple-ball"
+_music_enabled = True  # NOUVEAU FLAG GLOBAL (ou utilisez _internal_music si c'est le même concept)
 _internal_current_screen = "menu"
 _events_for_game_event = []
 
+# Variable pour stocker l'état de la musique que main.py doit connaître
+# Cette variable sera retournée par menu_event
+music_status_for_main = _music_enabled  # Initialiser avec l'état actuel
+
 
 def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED):
-    global _internal_running, _internal_current_screen, _internal_game_launched, _internal_avatar, _internal_ball_path, _internal_music, _events_for_game_event
+    global _internal_running, _internal_current_screen, _internal_game_launched, _internal_avatar
+    global _internal_ball_path, _music_enabled, _events_for_game_event, music_status_for_main
     pos = None;
     _events_for_game_event = pygame.event.get()
 
@@ -96,17 +103,31 @@ def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED)
                 elif guide_button_rect.collidepoint(pos):
                     _internal_current_screen = "guide"
                 elif parameter_button_rect.collidepoint(pos):
-                    _internal_current_screen = "parameter_on" if _internal_music else "parameter_off"
+                    # L'affichage parameter_on/off est géré par _music_enabled
+                    _internal_current_screen = "parameter_on" if _music_enabled else "parameter_off"
                 elif quit_menu_button_rect.collidepoint(pos):
                     _internal_running = False
             elif _internal_current_screen == "guide":
                 if return_menu_button_rect.collidepoint(pos): _internal_current_screen = "menu"
             elif _internal_current_screen in ["parameter_on", "parameter_off"]:
                 if return_menu_button_rect.collidepoint(pos): _internal_current_screen = "menu"
-                if _internal_current_screen == "parameter_on" and music_off_button_rect.collidepoint(pos):
-                    _internal_music = False;_internal_current_screen = "parameter_off"
-                elif _internal_current_screen == "parameter_off" and music_on_button_rect.collidepoint(pos):
-                    _internal_music = True;_internal_current_screen = "parameter_on"
+
+                # --- GESTION DES BOUTONS MUSIQUE ---
+                if _music_enabled and music_off_button_rect.collidepoint(pos):
+                    _music_enabled = False
+                    sound_manager.stop_music()  # Arrêter la musique
+                    _internal_current_screen = "parameter_off"  # Changer l'image de fond
+                    print("Music OFF")
+                elif not _music_enabled and music_on_button_rect.collidepoint(pos):
+                    _music_enabled = True
+                    # La musique sera relancée par main.py via play_appropriate_music()
+                    # si current_game_play_state est MENU, ou au début du prochain niveau.
+                    # Pour un effet immédiat dans les paramètres, on pourrait jouer la musique du menu ici.
+                    # sound_manager.play_music("menu") # Optionnel: relancer musique menu immédiatement
+                    _internal_current_screen = "parameter_on"  # Changer l'image de fond
+                    print("Music ON")
+                # --- FIN GESTION BOUTONS MUSIQUE ---
+
                 if avatar_1_button_rect.collidepoint(pos):
                     _internal_avatar = 1
                 elif avatar_2_button_rect.collidepoint(pos):
@@ -127,24 +148,29 @@ def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED)
                 new_caption = f"Dunk & Degree - {_internal_current_screen.replace('_', ' ').title()}"
                 pygame.display.set_caption(new_caption)
             pos = None
-    return _internal_running, _internal_game_launched, _internal_ball_path, _internal_avatar, _internal_current_screen
+
+    music_status_for_main = _music_enabled  # Mettre à jour le statut pour main.py
+    return _internal_running, _internal_game_launched, _internal_ball_path, _internal_avatar, _internal_current_screen, music_status_for_main
 
 
 def show_img(s, ui_state_for_background):
-    if ui_state_for_background == "menu" and menu_bg:
+    # Afficher parameter_on ou parameter_off basé sur _music_enabled
+    if ui_state_for_background == "parameter_on" and _music_enabled and parameter_on_bg:
+        s.blit(parameter_on_bg, (0, 0))
+    elif ui_state_for_background == "parameter_off" and not _music_enabled and parameter_off_bg:
+        s.blit(parameter_off_bg, (0, 0))
+    elif ui_state_for_background == "menu" and menu_bg:
         s.blit(menu_bg, (0, 0))
     elif ui_state_for_background == "guide" and guide_bg:
         s.blit(guide_bg, (0, 0))
     elif ui_state_for_background == "game" and game_bg:
         s.blit(game_bg, (0, 0))
-    elif ui_state_for_background == "parameter_on" and parameter_on_bg:
-        s.blit(parameter_on_bg, (0, 0))
-    elif ui_state_for_background == "parameter_off" and parameter_off_bg:
-        s.blit(parameter_off_bg, (0, 0))
 
 
 def show_overlay(s, ui_state_from_menu_event, avatar_id, ball_path):
-    if ui_state_from_menu_event in ["parameter_on", "parameter_off"]:
+    # L'affichage de l'overlay dépend de _music_enabled pour le fond des paramètres
+    # mais les boutons ON/OFF sont toujours dessinés (implicitement car ils font partie du fond parameter_on/off)
+    if ui_state_from_menu_event in ["parameter_on", "parameter_off"]:  # Doit correspondre à _internal_current_screen
         if not avatar_1_img: return
         a1, a2, a3 = (selected_avatar_1_img, avatar_2_img, avatar_3_img) if avatar_id == 1 else (
         avatar_1_img, selected_avatar_2_img, avatar_3_img) if avatar_id == 2 else (
