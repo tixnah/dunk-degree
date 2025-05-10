@@ -130,7 +130,7 @@ def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED)
     return _internal_running, _internal_game_launched, _internal_ball_path, _internal_avatar, _internal_current_screen
 
 
-def show_img(s, ui_state_for_background):  # Renommé pour clarifier son rôle
+def show_img(s, ui_state_for_background):
     if ui_state_for_background == "menu" and menu_bg:
         s.blit(menu_bg, (0, 0))
     elif ui_state_for_background == "guide" and guide_bg:
@@ -143,7 +143,7 @@ def show_img(s, ui_state_for_background):  # Renommé pour clarifier son rôle
         s.blit(parameter_off_bg, (0, 0))
 
 
-def show_overlay(s, ui_state_from_menu_event, avatar_id, ball_path):  # ui_state_from_menu_event pour les overlays
+def show_overlay(s, ui_state_from_menu_event, avatar_id, ball_path):
     if ui_state_from_menu_event in ["parameter_on", "parameter_off"]:
         if not avatar_1_img: return
         a1, a2, a3 = (selected_avatar_1_img, avatar_2_img, avatar_3_img) if avatar_id == 1 else (

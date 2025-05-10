@@ -41,10 +41,10 @@ def reset_ball_state(sw, sh):
     actual_start_x = avatar_x_pos + avatar_hand_offset_x
     actual_start_y = avatar_y_pos + avatar_hand_offset_y
     return {
-        "frames":[], "frame_index":0, "frame_delay":2, "frame_counter":0,
+        "frames":[], "frame_index":0, "frame_delay":3, "frame_counter":0,
         "start_x": actual_start_x, "start_y": actual_start_y,
         "x": actual_start_x, "y": actual_start_y,
-        "t":0, "angle":math.radians(55), "velocity":12, "gravity":0.06, # Valeurs pour t+=1
+        "t":0, "angle":math.radians(60), "velocity":7, "gravity":0.03,
         "shooting":False, "animation_done": False,
         "x_avatar":avatar_x_pos, "y_avatar": avatar_y_pos,
         "scored_this_throw":False, "vy_physics":0
@@ -87,13 +87,13 @@ def launch_ball(s):
 def adjust_ball_angle(s,d):
     if s["shooting"]:return
     deg=math.degrees(s["angle"])
-    if d=="up" and deg<80:deg+=2
-    elif d=="down" and deg>35:deg-=2
+    if d=="up" and deg<85:deg+=2
+    elif d=="down" and deg>30:deg-=2
     s["angle"]=math.radians(deg)
 
 def adjust_ball_velocity(s,d):
     if s["shooting"]:return
-    min_vo=5;max_vo=25;inc=1
+    min_vo=1;max_vo=15;inc=0.5
     if d=="right" and s["velocity"]<max_vo:s["velocity"]+=inc
     elif d=="left" and s["velocity"]>min_vo:s["velocity"]-=inc
 
