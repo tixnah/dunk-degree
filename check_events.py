@@ -133,12 +133,10 @@ quit_game_button_rect = pygame.Rect(1001,20,772,42)
 running = True      # Game loop
 game_launched = False
 avatar = 1
-ball = 1
+ball = "image/frames-purple-ball"
 music = True
 current_screen = "menu"
 pygame.display.set_caption("Dunk & Degree - Menu")
-
-
 
 
 def menu_event ():
@@ -243,13 +241,13 @@ def menu_event ():
 
                 #GESTION OF THE BALL
                 if violet_ball_button_rect.collidepoint(pos):
-                    ball = 1
+                    ball = "image/frames-purple-ball"
                     print("the purple ball has been chosen")
                 elif blue_ball_button_rect.collidepoint(pos):
-                    ball = 2
+                    ball = "image/frames-blue-ball"
                     print("the blue ball has been chosen")
                 elif orange_ball_button_rect.collidepoint(pos):
-                    ball = 3
+                    ball = "image/frames-orange-ball"
                     print("the orange ball has been chosen")
 
             #GESTION IN THE GAME
@@ -267,7 +265,7 @@ def menu_event ():
                     time.sleep(0.2)
                     print("\nDo You Want Start Playing ? \nIf 'Yes' Click on the START button!\n")
                     print("If you want to learn how to play Click on the Guide Button. \nIf you want to change your Avatar, the Basket Ball or even Mute the Music Click on the Option Button.")
-    return running, game_launched
+    return running, game_launched, ball, avatar
 
 
 def show_img():     # Function to display the images on the screen
@@ -303,15 +301,15 @@ def show_overlay():
             screen.blit(selected_avatar_3, (411, 238))
 
         #show the balls
-        if ball == 1:
+        if ball == "image/frames-purple-ball" :
             screen.blit(selected_violet_ball, (636, 354))
             screen.blit(blue_ball, (810, 354))
             screen.blit(orange_ball, (985, 354))
-        elif ball == 2:
+        elif ball == "image/frames-blue-ball" :
             screen.blit(violet_ball, (636, 354))
             screen.blit(selected_blue_ball, (810, 354))
             screen.blit(orange_ball, (985, 354))
-        elif ball == 3:
+        elif ball == "image/frames-orange-ball" :
             screen.blit(violet_ball, (636, 354))
             screen.blit(blue_ball, (810, 354))
             screen.blit(selected_orange_ball, (985, 354))

@@ -17,7 +17,7 @@ def reset_ball_state(screen_width, screen_height):
         "frame_index": 0,
         "frame_delay": 3,
         "frame_counter": 0,
-        "start_x": 140,
+        "start_x": 100,
         "start_y": screen_height - 250,
         "x": 100,
         "y": screen_height - 300,
