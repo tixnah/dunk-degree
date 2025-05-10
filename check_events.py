@@ -1,5 +1,6 @@
 import time
 from level import*
+from trajectory import *
 
 pygame.init()
 # Initialize all pygame modules
@@ -314,3 +315,23 @@ def show_overlay():
             screen.blit(violet_ball, (636, 354))
             screen.blit(blue_ball, (810, 354))
             screen.blit(selected_orange_ball, (985, 354))
+
+
+def game_event(ball_state):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            return False
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                launch_ball(ball_state)
+            elif event.key == pygame.K_UP:
+                adjust_ball_angle(ball_state, "up")
+            elif event.key == pygame.K_DOWN:
+                adjust_ball_angle(ball_state, "down")
+            elif event.key == pygame.K_LEFT:
+                adjust_ball_velocity(ball_state, "left")
+            elif event.key == pygame.K_RIGHT:
+                adjust_ball_velocity(ball_state, "right")
+
+    return True
