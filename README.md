@@ -2,13 +2,9 @@
 
 ## Suject
 
-* Projet Transverse :
+* Transverse Project :
 
-Des équipes d’étudiants collaborant pour apporter une solution
-technique à un besoin validé en mobilisant les tous acquis
-d’apprentissages de leur niveau d’étude. 
-
-
+Teams of students collaborate to provide a technical solution to a validated need by leveraging all of their learning outcomes at their level of study.
 
 
 * Problematic :
@@ -20,40 +16,47 @@ d’apprentissages de leur niveau d’étude.
 
 * Description:
 
-Game of Basket ball, including variable (time, speed), trajectory (curve), feedback (advice to help), graphic report and programming.
-
-Simulator of a basketball game, the goal being to score a maximum of points in a limited time. 
+Simulator of a basketball game, including variable (time, speed), trajectory (curve), feedback (advice to help), graphic report and programming, the goal being to score a maximum of points in a limited time. 
 
 
 ___________
 
 ## Game
 
-**Malus/Bonus :** 
-
-- Basketball → ball of bowling (masse change).
-- Basketball → ball with mass of a feather.
-- Basketball → golf ball (lighter + faster).
-
 **Gameplay :**
 
-- 3 life (ex : ball of bowling killing the player / ball of golf going too fast (rebondi contre les murs) and killing player)
-- Time (sablier or jauge decreasing as a function of the time)
-- Level (Easy, Normal, Difficult, Expert) 
-+ each level has several game
-+ you have to pass every game to go to the next level
-(+ you have stars at the end of every game to rate your gaming)
+- Time decreasing on the player's screen.
+- Different levels (Easy, Normal, Difficult)
 
 **Level :**
 
->Easy : the basket doesn’t move 
-- 3 game
->Normal : the basket move slowly 
-+ 3 game (left to right / up to done / every direction)
->Intermediate : the basket move at an average speed
-+ 5 game (left to right / up to down / left, right, up and down / diagonals)
->Difficult : the basket move faster at every game and
-+ 5 game different direction (left to right / up to down / left, right, up and down / diagonals)
->Expert : the basket move faster and even faster as the time pass 
-+ 1 (but 3) operation “fake hope”
-+ **Final Boss**
+- Easy : the basket doesn’t move
+    - level 1
+    - level 2
+    - level 3
+- Normal : the basket move slowly  (left to right / up to done / every direction)
+    - level 4
+    - level 5
+    - level 6
+- Intermediate : the basket move at an average speed (left to right / up to down / left, right, up and down / diagonals)
+    - level 7
+    - level 8
+    - level 9
+- Difficult : the basket move faster at every game (left to right / up to down / left, right, up and down / diagonals)
+    - level 10
+    - level 11
+    - level 12
+    - level 13
+    - level 14
+
+**How to play :**
+
+  Use the arrow keys of your keyboard to adjust the trajectory you want, then click on the space bar to shoot when you are ready.
+  Once the ball goes through the basket, your score increases of 1.
+  You have 30 seconds to score the maximum of points you can.
+
+___________
+
+## Coding part
+
+**THe functions and their utility :**
