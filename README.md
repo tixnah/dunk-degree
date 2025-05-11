@@ -54,3 +54,9 @@ ___________
   Use the arrow keys of your keyboard to adjust the trajectory you want, then click on the space bar to shoot when you are ready.
   Once the ball goes through the basket, your score increases of 1.
   You have 30 seconds to score the maximum of points you can.
+
+___________
+
+## Coding part
+
+**THe functions and their utility :**
