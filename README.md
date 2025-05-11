@@ -66,6 +66,7 @@ ___________
 - math for the levels and the trjectory
 - os for the interactions between the user and the program
 
+
 **The functions created :**
 
 In the "level.py" file : 
@@ -85,6 +86,8 @@ In the "level.py" file :
     Computes the new position for a movement from point 'cur' to point 'tar' at speed 'spd'.
 - basket_hoop(screen_surface, cur_diff_sel, cur_lvl, SW_UNUSED, SH_UNUSED) :
     Manages the movement and display of the basket. Movement logic depends on the current difficulty and level.
+
+
 
 In the "trajectory.py" file : 
 
@@ -109,6 +112,8 @@ In the "trajectory.py" file :
 - draw_trajectory_dots(surf, s, sw, sh, hoop_info=None) :
     Draws a preview of the ball's trajectory as points.
 
+
+
 In the "sound_manager.py" file :
 
 - init_mixer() :
@@ -123,6 +128,8 @@ In the "sound_manager.py" file :
     Sets the volume of the music.
 - is_playing(key=None) :
     Checks if a song is playing. If a key is provided, checks if THIS specific song is playing.
+
+
 
 In the "main.py" file :
 
