@@ -29,7 +29,7 @@ except pygame.error as e:
     winner_screen_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT));
     winner_screen_image.fill((20, 100, 20))
     fb_font_w = pygame.font.Font(None, 50);
-    fb_text_w = fb_font_w.render("FELICITATIONS !", True, (255, 255, 255))
+    fb_text_w = fb_font_w.render("CONGRATS !", True, (255, 255, 255))
     fb_rect_w = fb_text_w.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2));
     winner_screen_image.blit(fb_text_w, fb_rect_w)
 try:
@@ -175,7 +175,7 @@ def advance_to_next_challenge():
         if difficulty_selector < len(difficulty) - 1:
             difficulty_selector += 1;level_value = 0;start_new_level_setup()
         else:
-            print("JEU COMPLETÉ!");current_game_play_state = GAME_STATE_GAME_OVER_WIN;play_appropriate_music()
+            print("GAME COMPLETED!");current_game_play_state = GAME_STATE_GAME_OVER_WIN;play_appropriate_music()
 
 
 def display_centered_message(txt, fnt, col=(255, 255, 255), y_off=0, aa=True):
@@ -286,11 +286,11 @@ while running:
                 s_surf = score_font.render(f"Score: {score}", True, (255, 255, 255));
                 screen.blit(s_surf, (10, 10))
                 gl_lvl = get_global_level_number(difficulty_selector, level_value);
-                lvl_txt = f"Niveau {gl_lvl}"
+                lvl_txt = f"Level {gl_lvl}"
                 lvl_s = score_font.render(lvl_txt, True, (255, 255, 255));
                 lvl_r = lvl_s.get_rect(midtop=(SCREEN_WIDTH // 2, 10));
                 screen.blit(lvl_s, lvl_r)
-                t_surf = timer_font.render(f"Temps: {time_remaining}", True, (255, 255, 0));
+                t_surf = timer_font.render(f"Time: {time_remaining}", True, (255, 255, 0));
                 t_r = t_surf.get_rect(topright=(SCREEN_WIDTH - 10, 10));
                 screen.blit(t_surf, t_r)
 
@@ -314,9 +314,9 @@ while running:
                 if game_over_lose_screen_image:
                     screen.blit(game_over_lose_screen_image, (0, 0))
                 else:
-                    display_centered_message("TEMPS ECOULE !", message_font, (200, 0, 0), -50)
+                    display_centered_message("TIME IS OVER !", message_font, (200, 0, 0), -50)
                     display_centered_message("GAME OVER", message_font, (200, 0, 0), 50)
-                final_score_text = f"Score Final: {score}"
+                final_score_text = f"Final score: {score}"
                 display_centered_message(final_score_text, final_score_font, (230, 230, 230), SCREEN_HEIGHT * 0.25)
                 current_ticks_for_game_over_display = pygame.time.get_ticks()
                 if current_ticks_for_game_over_display - game_over_time_display_start >= GAME_OVER_MESSAGE_DURATION:
