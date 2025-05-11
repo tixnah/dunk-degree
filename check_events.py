@@ -1,9 +1,10 @@
+# check_events.py
 import pygame
 import time
 from trajectory import launch_ball, adjust_ball_angle, adjust_ball_velocity
-import sound_manager  # Assurez-vous que sound_manager est importé
+import sound_manager
 
-# ... (chargements _raw et variables d'images converties comme avant) ...
+# ... (rest of the existing imports and global variables) ...
 menu_bg_raw = pygame.image.load("image/menu.png");
 guide_bg_raw = pygame.image.load("image/guide.png")
 game_bg_raw = pygame.image.load("image/background.png");
@@ -71,13 +72,19 @@ _internal_running = True;
 _internal_game_launched = False;
 _internal_avatar = 1
 _internal_ball_path = "image/frames-purple-ball"
-_music_enabled = True  # NOUVEAU FLAG GLOBAL (ou utilisez _internal_music si c'est le même concept)
+_music_enabled = True
 _internal_current_screen = "menu"
 _events_for_game_event = []
 
-# Variable pour stocker l'état de la musique que main.py doit connaître
-# Cette variable sera retournée par menu_event
-music_status_for_main = _music_enabled  # Initialiser avec l'état actuel
+music_status_for_main = _music_enabled
+
+
+# NEW FUNCTION to be called by main.py when game ends internally
+def set_game_ended_from_main():
+    global _internal_game_launched, _internal_current_screen
+    _internal_game_launched = False
+    _internal_current_screen = "menu"
+    pygame.display.set_caption(f"Dunk & Degree - Menu")  # Optional: update caption immediately
 
 
 def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED):
@@ -89,21 +96,26 @@ def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED)
     for event in _events_for_game_event:
         if event.type == pygame.QUIT: _internal_running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if _internal_current_screen != "game" or not _internal_game_launched:
+            # Only consider clicks if not in game, or if it's the quit game button during game
+            if not _internal_game_launched or (
+                    _internal_game_launched and quit_game_button_rect.collidepoint(event.pos)):
                 pos = event.pos
-            elif _internal_current_screen == "game" and _internal_game_launched:
-                if quit_game_button_rect.collidepoint(event.pos):
-                    pos = event.pos
+            # This line was a bit complex, simplified above. Original:
+            # if _internal_current_screen != "game" or not _internal_game_launched:
+            #     pos = event.pos
+            # elif _internal_current_screen == "game" and _internal_game_launched:
+            #     if quit_game_button_rect.collidepoint(event.pos):
+            #         pos = event.pos
 
         if pos is not None:
             prev_screen = _internal_current_screen
             if _internal_current_screen == "menu":
                 if start_button_rect.collidepoint(pos):
-                    _internal_current_screen = "game";_internal_game_launched = True
+                    _internal_current_screen = "game";
+                    _internal_game_launched = True
                 elif guide_button_rect.collidepoint(pos):
                     _internal_current_screen = "guide"
                 elif parameter_button_rect.collidepoint(pos):
-                    # L'affichage parameter_on/off est géré par _music_enabled
                     _internal_current_screen = "parameter_on" if _music_enabled else "parameter_off"
                 elif quit_menu_button_rect.collidepoint(pos):
                     _internal_running = False
@@ -112,21 +124,16 @@ def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED)
             elif _internal_current_screen in ["parameter_on", "parameter_off"]:
                 if return_menu_button_rect.collidepoint(pos): _internal_current_screen = "menu"
 
-                # --- GESTION DES BOUTONS MUSIQUE ---
                 if _music_enabled and music_off_button_rect.collidepoint(pos):
                     _music_enabled = False
-                    sound_manager.stop_music()  # Arrêter la musique
-                    _internal_current_screen = "parameter_off"  # Changer l'image de fond
-                    print("Music OFF")
+                    sound_manager.stop_music()
+                    _internal_current_screen = "parameter_off"
+                    # print("Music OFF") # Debug
                 elif not _music_enabled and music_on_button_rect.collidepoint(pos):
                     _music_enabled = True
-                    # La musique sera relancée par main.py via play_appropriate_music()
-                    # si current_game_play_state est MENU, ou au début du prochain niveau.
-                    # Pour un effet immédiat dans les paramètres, on pourrait jouer la musique du menu ici.
-                    # sound_manager.play_music("menu") # Optionnel: relancer musique menu immédiatement
-                    _internal_current_screen = "parameter_on"  # Changer l'image de fond
-                    print("Music ON")
-                # --- FIN GESTION BOUTONS MUSIQUE ---
+                    # Music will be handled by main.py's play_appropriate_music logic
+                    _internal_current_screen = "parameter_on"
+                    # print("Music ON") # Debug
 
                 if avatar_1_button_rect.collidepoint(pos):
                     _internal_avatar = 1
@@ -140,25 +147,31 @@ def menu_event(SCREEN_WIDTH_UNUSED, SCREEN_HEIGHT_UNUSED, screen_surface_UNUSED)
                     _internal_ball_path = "image/frames-blue-ball"
                 elif orange_ball_button_rect.collidepoint(pos):
                     _internal_ball_path = "image/frames-orange-ball"
-            elif _internal_current_screen == "game":
-                if quit_game_button_rect.collidepoint(
-                    pos): _internal_current_screen = "menu";_internal_game_launched = False
 
-            if prev_screen != _internal_current_screen:
+            # This case handles the "Quit Game" button clicked from the game screen overlay
+            elif _internal_current_screen == "game" and _internal_game_launched:  # Check _internal_game_launched to be sure
+                if quit_game_button_rect.collidepoint(pos):
+                    _internal_current_screen = "menu"
+                    _internal_game_launched = False
+
+            if prev_screen != _internal_current_screen and _internal_current_screen != "game":  # Avoid changing caption if going to game
                 new_caption = f"Dunk & Degree - {_internal_current_screen.replace('_', ' ').title()}"
                 pygame.display.set_caption(new_caption)
+            elif _internal_current_screen == "game" and _internal_game_launched:
+                pygame.display.set_caption("Dunk & Degree - Playing")
+
             pos = None
 
-    music_status_for_main = _music_enabled  # Mettre à jour le statut pour main.py
+    music_status_for_main = _music_enabled
     return _internal_running, _internal_game_launched, _internal_ball_path, _internal_avatar, _internal_current_screen, music_status_for_main
 
 
 def show_img(s, ui_state_for_background):
-    # Afficher parameter_on ou parameter_off basé sur _music_enabled
-    if ui_state_for_background == "parameter_on" and _music_enabled and parameter_on_bg:
-        s.blit(parameter_on_bg, (0, 0))
-    elif ui_state_for_background == "parameter_off" and not _music_enabled and parameter_off_bg:
-        s.blit(parameter_off_bg, (0, 0))
+    # Parameter screen background depends on _music_enabled and the ui_state
+    if ui_state_for_background == "parameter_on":  # Intended state is ON
+        s.blit(parameter_on_bg if _music_enabled else parameter_off_bg, (0, 0))
+    elif ui_state_for_background == "parameter_off":  # Intended state is OFF
+        s.blit(parameter_off_bg if not _music_enabled else parameter_on_bg, (0, 0))
     elif ui_state_for_background == "menu" and menu_bg:
         s.blit(menu_bg, (0, 0))
     elif ui_state_for_background == "guide" and guide_bg:
@@ -168,32 +181,44 @@ def show_img(s, ui_state_for_background):
 
 
 def show_overlay(s, ui_state_from_menu_event, avatar_id, ball_path):
-    # L'affichage de l'overlay dépend de _music_enabled pour le fond des paramètres
-    # mais les boutons ON/OFF sont toujours dessinés (implicitement car ils font partie du fond parameter_on/off)
-    if ui_state_from_menu_event in ["parameter_on", "parameter_off"]:  # Doit correspondre à _internal_current_screen
-        if not avatar_1_img: return
-        a1, a2, a3 = (selected_avatar_1_img, avatar_2_img, avatar_3_img) if avatar_id == 1 else (
-        avatar_1_img, selected_avatar_2_img, avatar_3_img) if avatar_id == 2 else (
-        avatar_1_img, avatar_2_img, selected_avatar_3_img)
-        s.blit(a1, (66, 238));
-        s.blit(a2, (239, 238));
-        s.blit(a3, (411, 238))
-        b1, b2, b3 = (
-        selected_violet_ball_img, blue_ball_img, orange_ball_img) if ball_path == "image/frames-purple-ball" else (
-        violet_ball_img, selected_blue_ball_img, orange_ball_img) if ball_path == "image/frames-blue-ball" else (
-        violet_ball_img, blue_ball_img, selected_orange_ball_img)
-        s.blit(b1, (636, 354));
-        s.blit(b2, (810, 354));
-        s.blit(b3, (985, 354))
+    if ui_state_from_menu_event in ["parameter_on", "parameter_off"]:
+        if not avatar_1_img: return  # Ensure assets are loaded
+
+        current_avatar_display_tuple = (selected_avatar_1_img, avatar_2_img, avatar_3_img)
+        if avatar_id == 2:
+            current_avatar_display_tuple = (avatar_1_img, selected_avatar_2_img, avatar_3_img)
+        elif avatar_id == 3:
+            current_avatar_display_tuple = (avatar_1_img, avatar_2_img, selected_avatar_3_img)
+
+        s.blit(current_avatar_display_tuple[0], (66, 238));
+        s.blit(current_avatar_display_tuple[1], (239, 238));
+        s.blit(current_avatar_display_tuple[2], (411, 238))
+
+        current_ball_display_tuple = (selected_violet_ball_img, blue_ball_img, orange_ball_img)
+        if ball_path == "image/frames-blue-ball":
+            current_ball_display_tuple = (violet_ball_img, selected_blue_ball_img, orange_ball_img)
+        elif ball_path == "image/frames-orange-ball":
+            current_ball_display_tuple = (violet_ball_img, blue_ball_img, selected_orange_ball_img)
+
+        s.blit(current_ball_display_tuple[0], (636, 354));
+        s.blit(current_ball_display_tuple[1], (810, 354));
+        s.blit(current_ball_display_tuple[2], (985, 354))
 
 
 def game_event(ball_state, current_game_play_state_from_main):
-    global _events_for_game_event
+    global _events_for_game_event  # Use the events captured by menu_event
+
+    # Only process game inputs if the game is in 'playing' state
     if current_game_play_state_from_main != "playing":
-        _events_for_game_event = []
+        _events_for_game_event = []  # Clear events if not in playing state to avoid stale inputs
         return True
-    running_status = True
+
+    running_status = True  # Default to true, could be changed by e.g. ESC key if implemented
     for e in _events_for_game_event:
+        # pygame.QUIT is handled in menu_event, but good to have a safeguard
+        if e.type == pygame.QUIT:
+            running_status = False
+            break
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_SPACE:
                 launch_ball(ball_state)
@@ -205,5 +230,7 @@ def game_event(ball_state, current_game_play_state_from_main):
                 adjust_ball_velocity(ball_state, "left")
             elif e.key == pygame.K_RIGHT:
                 adjust_ball_velocity(ball_state, "right")
-    _events_for_game_event = []
+            # Example: if e.key == pygame.K_ESCAPE: running_status = False # To quit game via ESC
+
+    _events_for_game_event = []  # Clear events after processing
     return running_status
